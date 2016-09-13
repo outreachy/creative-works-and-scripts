@@ -1,0 +1,129 @@
+" Copyright © 2016 Sarah Sharp <sarah@thesharps.us>
+"
+" This program is free software: you can redistribute it and/or modify
+" it under the terms of the GNU General Public License as published by
+" the Free Software Foundation, either version 3 of the License, or
+" (at your option) any later version.
+" 
+" This program is distributed in the hope that it will be useful,
+" but WITHOUT ANY WARRANTY; without even the implied warranty of
+" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+" GNU General Public License for more details.
+" 
+" You should have received a copy of the GNU General Public License
+" along with this program.  If not, see <http://www.gnu.org/licenses/>.
+"
+" This is a vim substitution script to switch over old dates
+" from the May to August 2016 round (round 12)
+" to the December to March 2016 round (round 13)
+"
+" To use this script, simply make vim run the commands in this file
+" when it first opens a text file containing the raw moin wiki file:
+" $ vim -c 'source update-dates-subs.txt' wiki-file.txt
+
+" orgs start being listed:
+%s/February 9, 2016/September 12, 2016/
+%s/February 9/September 12/
+
+" opening:
+%s/February 16, 2016/September 12, 2016/
+%s/February 16/September 12/
+
+" deadline:
+%s/March 22, 2016/October 17, 2016/
+%s/March 22/October 17/
+
+" extended application deadline:
+%s/April 7, 2016/October 31, 2016/
+%s/April 7/October 31/
+
+" accepted announcement:
+%s/April 22, 2016/November 8, 2016/
+%s/April 22/November 8/
+
+" internship start:
+%s/May 23, 2016/December 6, 2016/
+%s/May 23/December 6/
+
+" internship end:
+%s/August 23, 2016/March 6, 2017/
+%s/August 23/March 6/
+
+" accepted:
+%s/April 22, 2016/November 8, 2016/
+%s/April 22/November 8/
+
+" upcoming round page:
+%s/Outreachy\/2016\/MayAugust/Outreachy\/2016\/DecemberMarch/
+%s/Outreachy\/2016\/DecMarch/Outreachy\/2016\/DecemberMarch/
+
+" Outreachy round page changes e.g. Outreachy/2016/DecemberMarch
+" update call for donors
+%s/sponsor internships in future rounds/sponsor internships for this round/
+" orgs finalized:
+%s/Febrary 16, 2016 || participating organizations are finalized/September 26, 2016 || participating organizations are finalized/
+%s/Febrary 16 || participating organizations are finalized/September 26 || participating organizations are finalized/
+" Payments:
+" Per Bradley's email on August 16, 2016
+" First Payment    btw <7-days-after-you-give-me-data> to <30-days-after-data>;
+"                  we will try our best for earlier side of window
+" Collect mid-term feedback so they can be paid end of week 7
+%s/May 31/December 14/
+%s/June 24/January 4/
+%s/July 15/January 26/
+%s/August 5/February 16/
+%s/September 2 /March 15 /
+%s/September 23/April 5/
+%s/May 2016 round/December 2016 round/
+
+" sponsorship info is on Outreachy round homepage & info for orgs page
+" fix typo; unnecessary "the"
+%s/Outreachy is hosted by Software Freedom Conservancy with the special support from Red Hat and the GNOME Foundation/Outreachy is hosted by Software Freedom Conservancy with special support from Red Hat and the GNOME Foundation/
+" Remove any references to special sponsors
+%s/Additionally, O'Reilly is.*for Outreachy as part of its OSCON 2016 registration and matching the raised funds.//
+" Comment out old sponsors until we get at least one new donor
+%s/This round is generously sponsored by the following organizations and companies./{{{#!wiki comment This round is generously sponsored by the following organizations and companies./
+%s/'''Ceiling Smasher''':.*/'''Ceiling Smasher''':/
+%s/'''Equalizers''':.*/'''Equalizers''':/
+%s/'''Promoters''':.*/'''Promoters''':/
+%s/'''Includers''':.*/'''Includers''': }}}/
+
+" tally up the new past participants. 281+41=322
+%s/281 past participants/322 past participants/
+" oh goodness, I guess look through emails of travel requests to tally up conference talks? What about those interns that never use the travel funds, or give more talks without travel requests?
+" Marina updated the page on 2016-01 to show 41 talks, 27 in 2015
+" 2015-10 Ebru Akagündüz at LinuxCon Europe (panel)
+" 2015-10 Cristina Georgiana Opriceana at LinuxCon Europe (panel)
+" 2016-01 Vanessa Chipirrás at Gstreamer conference in October 7-8 (lightning talk)
+" 2016-03 Aya Mahfouz at LinuxCon Europe (panel)
+" 2015-10 Roberta Dobrescu at LinuxCon Europe (panel)
+" 2016-05 Arushi Vashist at FOSSASIA
+" 2016-05 Iulia Manda at LinuxCon Europe (panel)
+" 2016:
+" Shivani Bhardwaj at Netfilter Workshop in Amsterdam
+" 48+
+" %s/48 had full-session talks at FOSS conferences, 27 of them in 2015/48 had full-session talks at FOSS conferences, 27 of them in 2015, 7 of them in 2015/
+
+" For info for orgs (proposal) page
+" Update total interns (wouldn't it be nice if CiviCRM could update all these stats and regenerate the webpages?
+%s/37 : round 11/37 : round 1141 : round 12/
+%s/Total interns (as of round 11): 281/Total interns (as of round 12): 322/
+%s/The current round has 41 interns./The previous round had 41 interns./
+%s/some of the sponsors of the program/some of the past sponsors of the program/
+" Marina didn't have time to finish this, so we're moving the project deadline back some
+%s/he funding commitment needs to be made by August 22/he funding commitment needs to be made by September 7/
+" Marina already updated this, but we really *explicative* need to automate this process.
+" %s/322 past Outreachy participants, 48 had full-session talks/322 past Outreachy participants, 48 had full-session talks/
+" Oh godness, why is this section a paragraph instead of a bulleted list we just #include or something CiviCRM generates for us??
+" By supporting the Outreachy internships, participating companies are working upstream and improving the diversity of the FOSS community. In total, of 322 past Outreachy participants, 48 had full-session talks at FOSS conferences and 43 found employment or contract work with sponsoring organizations. Three past participants have organized local technology initiatives: Chicagoans Hacking on GNOME, the Nairobi Dev School, and Women in Free Software - India. Many find the program life-changing, as it introduces them to something they become passionate about and opens the door to new opportunities.
+" For the last round, 41 participants were accepted and about 100 applicants worked with a mentor
+
+" For mentor getting started page
+" comment out reference to Google Summer of code
+%s/ 1. if your organization is participating in Google Summer of Code, ask applicants who are students applying to work on coding tasks to apply for both programs - they can still be a part of Outreachy community if they are accepted for Google Summer of Code and other than that there really is no difference between the two programs - Outreachy was created because women felt intimidated to apply for Google Summer of Code/{{{#!wiki comment 1. if your organization is participating in Google Summer of Code, ask applicants who are students applying to work on coding tasks to apply for both programs - they can still be a part of Outreachy community if they are accepted for Google Summer of Code and other than that there really is no difference between the two programs - Outreachy was created because women felt intimidated to apply for Google Summer of Code}}}/
+" reopen mentorship application system and correct the date
+%s/{{{#!wiki comment 1. after February 9, sign up as a mentor in the [[https://opw.gnome.org|online application system]] by following the [[Outreachy/Admin/System|guide]] for it }}}/ 1. after September 12, sign up as a mentor in the [[https://opw.gnome.org|online application system]] by following the [[Outreachy/Admin/System|guide]] for it /
+" update landing page names
+%s/"Round 12" or "May 2016"/"Round 13" or "December 2016"/
+
+" The main page needs to be edited by hand, since it contains old dates for previous rounds
