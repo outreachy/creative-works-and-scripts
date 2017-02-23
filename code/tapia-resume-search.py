@@ -15,9 +15,16 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# This script attempts to match skillset keywords in resumes with
+# Outreachy projects. The skillset keyword lists are based on the
+# Outreachy project list at:
+# https://wiki.gnome.org/Outreachy/2017/MayAugust
+#
 # This program expects you to have created a directory with identically
 # named PDF and text resume files. You can translate PDF files to text with:
 # $ for i in `ls *.pdf`; do pdftotext $i; done
+#
+#
 
 import argparse
 import csv
@@ -47,10 +54,11 @@ projectsMay2017 = [
     outreachyProject('Lagome', ['Java'], ['Scala', 'REST', 'reactive', 'microservice', 'microservices']),
     outreachyProject('Linux kernel', ['Linux', 'operating systems', 'C(?!\+\+)'], ['networking', 'memory']),
     outreachyProject('oVirt', ['Python', 'JavaScript', 'distributed systems', 'distributed system'], ['react', 'redux', 'ES6']),
-    outreachyProject('QEMU', ['C(?!\+\+)', 'Python', 'virtualization'], ['audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor']),
+    outreachyProject('QEMU', ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU'], ['audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
     outreachyProject('Sugar Labs', ['JavaScript', 'documentation'], ['design', 'graphics', 'music', 'audio']),
-    outreachyProject('Wikimedia', ['JavaScript', 'PHP', 'documentation', 'Hungarian'], ['localization', 'MediaWiki', 'wiki']),
+    outreachyProject('Wikimedia', ['JavaScript', 'PHP', 'documentation', 'Hungarian'], ['localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
     outreachyProject('Wine', ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics'], ['UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
+    outreachyProject('Yocto', ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto'], ['openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
 ]
 
 class resumeFile:
@@ -128,6 +136,7 @@ def filterCadastaResumes(matches, hitcount):
     resumes.update([resume for (resume, project) in cmatches if 'django' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'selenium' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'oauth' in project.keywords])
+    print('Cadasta:', len(resumes))
     return resumes
 
 def filterCephResumes(matches, hitcount):
@@ -138,6 +147,7 @@ def filterCephResumes(matches, hitcount):
     resumes.update([resume for (resume, project) in cmatches if 'file systems' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed system' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed systems' in project.keywords])
+    print('Ceph:', len(resumes))
     return resumes
 
 def filterDebianResumes(matches, hitcount):
@@ -153,6 +163,7 @@ def filterDiscourseResumes(matches, hitcount):
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'rails' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'ember.js' in project.keywords])
+    print('Debian:', len(resumes))
     return resumes
 
 def filterFedoraResumes(matches, hitcount):
@@ -169,13 +180,14 @@ def filterFedoraResumes(matches, hitcount):
     resumes.update([resume for (resume, project) in cmatches if 'storyboarding' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'fedora' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'artist' in project.keywords])
-    print(len(resumes))
+    print('Fedora:', len(resumes))
     return resumes
 
 def filterGNOMEResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'GNOME'] for (resume, projectList) in matches], [])
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'gtk' in project.keywords])
+    print('GNOME:', len(resumes))
     return resumes
 
 def filterLagomeResumes(matches, hitcount):
@@ -183,23 +195,82 @@ def filterLagomeResumes(matches, hitcount):
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'scala' in project.optionalKeywords])
     resumes.update([resume for (resume, project) in cmatches if 'reactive' in project.optionalKeywords])
+    print('Lagome:', len(resumes))
     return resumes
 
 def filteroVirtResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'oVirt'] for (resume, projectList) in matches], [])
-    print('oVirt', len(cmatches))
-    for k in projectsMay2017[9].keywords + projectsMay2017[9].optionalKeywords:
-        print('\t', k, len([resume for (resume, project) in cmatches
-                            if k.lower() in project.keywords or
-                            k.lower() in project.optionalKeywords
-                           ]))
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'react' in project.optionalKeywords])
     resumes.update([resume for (resume, project) in cmatches if 'redux' in project.optionalKeywords])
     resumes.update([resume for (resume, project) in cmatches if 'es6' in project.optionalKeywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed system' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed systems' in project.keywords])
-    print(len(resumes))
+    print('oVirt:', len(resumes))
+    return resumes
+
+def filterQEMUResumes(matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList if project.name == 'QEMU'] for (resume, projectList) in matches], [])
+    resumes = set()
+    resumes.update([resume for (resume, project) in cmatches if 'virtualization' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'pci' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'pcie' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'audio' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'command-line' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'storage' in project.optionalKeywords])
+    print('QEMU: ', len(resumes))
+    return resumes
+
+def filterSugarLabsResumes(matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Sugar Labs'] for (resume, projectList) in matches], [])
+    resumes = set()
+    resumes.update([resume for (resume, project) in cmatches if 'music' in project.optionalKeywords])
+    print('Sugar Labs:', len(resumes))
+    return resumes
+
+def filterWikimediaResumes(matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Wikimedia'] for (resume, projectList) in matches], [])
+    resumes = set()
+    js = [resume for (resume, project) in cmatches if 'javascript' in project.keywords]
+    docs = [resume for (resume, project) in cmatches if 'documentation' in project.keywords]
+    # Look for people with both JavaScript and documentation experience
+    resumes.update(list(set(js) & set(docs)))
+    # PHP and vagrant experience
+    php = [resume for (resume, project) in cmatches if 'php' in project.keywords]
+    vagrant = [resume for (resume, project) in cmatches if 'vagrant' in project.keywords]
+    resumes.update(list(set(php) & set(vagrant)))
+    resumes.update([resume for (resume, project) in cmatches if 'hungarian' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'mediawiki' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'wiki' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'wikipedia' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'localization' in project.optionalKeywords])
+    print('Wikimedia:', len(resumes))
+    return resumes
+
+def filterYoctoResumes(matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Yocto'] for (resume, projectList) in matches], [])
+    #print('Yocto', len(cmatches))
+    #for k in projectsMay2017[14].keywords + projectsMay2017[14].optionalKeywords:
+    #    print('\t', k, len([resume for (resume, project) in cmatches
+    #                        if k.lower() in project.keywords or
+    #                        k.lower() in project.optionalKeywords
+    #                       ]))
+    resumes = set()
+    resumes.update([resume for (resume, project) in cmatches if 'embedded' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'distro' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'beaglebone' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'beagle bone' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'robotics' in project.keywords])
+    arduino = [resume for (resume, project) in cmatches if 'arduino' in project.optionalKeywords]
+    linux = [resume for (resume, project) in cmatches if 'linux' in project.keywords]
+    clanguage = [resume for (resume, project) in cmatches if 'c' in project.keywords]
+    pythonlanguage = [resume for (resume, project) in cmatches if 'python' in project.keywords]
+    # Look for non-traditional embedded folks (people who have experienced
+    # both Arduino and have experience with either C or Linux or Python).
+    resumes.update(list(set(arduino) & set(linux)))
+    resumes.update(list(set(arduino) & set(clanguage)))
+    resumes.update(list(set(arduino) & set(pythonlanguage)))
+    print('Yocto:', len(resumes))
     return resumes
 
 def matchWithProjects(resumeFiles):
@@ -239,14 +310,18 @@ def matchWithProjects(resumeFiles):
                 allkeywords.add(keyword)
         hitcount.update(allkeywords)
     print(hitcount)
-    #filterCadastaResumes(goldresumes + silverresumes, hitcount)
-    #filterCephResumes(goldresumes + silverresumes, hitcount)
-    #filterDebianResumes(goldresumes + silverresumes, hitcount)
-    #filterDiscourseResumes(goldresumes + silverresumes, hitcount)
-    #filterFedoraResumes(goldresumes + silverresumes, hitcount)
-    #filterGNOMEResumes(goldresumes + silverresumes, hitcount)
-    #filterLagomeResumes(goldresumes + silverresumes, hitcount)
+    filterCadastaResumes(goldresumes + silverresumes, hitcount)
+    filterCephResumes(goldresumes + silverresumes, hitcount)
+    filterDebianResumes(goldresumes + silverresumes, hitcount)
+    filterDiscourseResumes(goldresumes + silverresumes, hitcount)
+    filterFedoraResumes(goldresumes + silverresumes, hitcount)
+    filterGNOMEResumes(goldresumes + silverresumes, hitcount)
+    filterLagomeResumes(goldresumes + silverresumes, hitcount)
     filteroVirtResumes(goldresumes + silverresumes, hitcount)
+    filterQEMUResumes(goldresumes + silverresumes, hitcount)
+    filterSugarLabsResumes(goldresumes + silverresumes, hitcount)
+    filterWikimediaResumes(goldresumes + silverresumes, hitcount)
+    filterYoctoResumes(goldresumes + silverresumes, hitcount)
 
 def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
