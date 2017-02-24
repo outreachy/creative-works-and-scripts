@@ -36,59 +36,42 @@ from collections import Counter
 class outreachyProject:
     name = ''
     keywords = []
-    optionalKeywords = []
 
-    def __init__(self, name, keywords, optional):
+    def __init__(self, name, keywords):
         self.name = name
         self.keywords = keywords
-        self.optionalKeywords = optional
 
 projectsMay2017 = [
     outreachyProject('Outreachy',
-                     ['open source', 'free software'],
-                     ['Linux', 'Unix', 'Solaris']),
+                     ['open source', 'free software', 'Linux', 'Unix', 'Solaris']),
     outreachyProject('Cadasta',
-                     ['Python', 'Django', 'JavaScript', 'HTML', 'OAuth', 'Selenium'],
-                     ['front-end', 'back-end']),
+                     ['Python', 'Django', 'JavaScript', 'HTML', 'OAuth', 'Selenium', 'front-end', 'back-end']),
     outreachyProject('Ceph',
-                     ['Python', 'storage', 'file system', 'file systems', 'distributed system', 'distributed systems'],
-                     ['C(?!\+\+)', 'C\+\+', 'Linux', 'probability', 'statistics', 'front-end', 'design', 'operating systems']),
+                     ['Python', 'storage', 'file system', 'file systems', 'distributed system', 'distributed systems', 'C(?!\+\+)', 'C\+\+', 'Linux', 'probability', 'statistics', 'front-end', 'design', 'operating systems']),
     outreachyProject('Debian',
-                     ['Debian', 'Linux', 'Greek', 'scientific', 'linear algebra', 'optimization', 'gcc', 'localization', 'documentation', 'internationalization'],
-                     ['Python', 'Perl']),
+                     ['Debian', 'Linux', 'Greek', 'scientific', 'linear algebra', 'optimization', 'gcc', 'localization', 'documentation', 'internationalization', 'Python', 'Perl']),
     outreachyProject('Discourse',
-                     ['rails', 'ember.js', 'JavaScript'],
-                     ['OpenCollective', 'Slack', 'chat']),
+                     ['rails', 'ember.js', 'JavaScript', 'OpenCollective', 'Slack', 'chat']),
     outreachyProject('Fedora',
-                     ['design', 'graphics', 'artist', 'Fedora', 'Linux', 'storyboard', 'storyboarding'],
-                     ['Inkscape', 'Scribus']),
+                     ['design', 'graphics', 'artist', 'Fedora', 'Linux', 'storyboard', 'storyboarding', 'Inkscape', 'Scribus']),
     outreachyProject('GNOME',
-                     ['GTK', 'C(?!\+\+)', 'Linux'],
-                     ['Python', 'Vala', 'maps']),
+                     ['GTK', 'C(?!\+\+)', 'Linux', 'Python', 'Vala', 'maps']),
     outreachyProject('Lagome',
-                     ['Java'],
-                     ['Scala', 'REST', 'reactive', 'microservice', 'microservices']),
+                     ['Java', 'Scala', 'REST', 'reactive', 'microservice', 'microservices']),
     outreachyProject('Linux kernel',
-                     ['Linux', 'operating systems', 'C(?!\+\+)'],
-                     ['networking', 'memory']),
+                     ['Linux', 'operating systems', 'C(?!\+\+)', 'networking', 'memory']),
     outreachyProject('oVirt',
-                     ['Python', 'JavaScript', 'distributed systems', 'distributed system'],
-                     ['react', 'redux', 'ES6']),
+                     ['Python', 'JavaScript', 'distributed systems', 'distributed system', 'react', 'redux', 'ES6']),
     outreachyProject('QEMU',
-                     ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU'],
-                     ['audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
+                     ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU', 'audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
     outreachyProject('Sugar Labs',
-                     ['JavaScript', 'documentation'],
-                     ['design', 'graphics', 'music', 'audio']),
+                     ['JavaScript', 'documentation', 'design', 'graphics', 'music', 'audio']),
     outreachyProject('Wikimedia',
-                     ['JavaScript', 'PHP', 'documentation', 'Hungarian'],
-                     ['localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
+                     ['JavaScript', 'PHP', 'documentation', 'Hungarian', 'localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
     outreachyProject('Wine',
-                     ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics'],
-                     ['UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
+                     ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics', 'UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
     outreachyProject('Yocto',
-                     ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto'],
-                     ['openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
+                     ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto', 'openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
 ]
 
 class resumeFile:
@@ -201,7 +184,7 @@ def filterDiscourseResumes(matches, hitcount):
 def filterFedoraResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'Fedora'] for (resume, projectList) in matches], [])
     resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'inkscape' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'inkscape' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'storyboard' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'storyboarding' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'fedora' in project.keywords])
@@ -219,17 +202,17 @@ def filterGNOMEResumes(matches, hitcount):
 def filterLagomeResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'Lagome'] for (resume, projectList) in matches], [])
     resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'scala' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'reactive' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'scala' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'reactive' in project.keywords])
     print('Lagome:', len(resumes))
     return resumes
 
 def filteroVirtResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'oVirt'] for (resume, projectList) in matches], [])
     resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'react' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'redux' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'es6' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'react' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'redux' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'es6' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed system' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distributed systems' in project.keywords])
     print('oVirt:', len(resumes))
@@ -241,16 +224,16 @@ def filterQEMUResumes(matches, hitcount):
     resumes.update([resume for (resume, project) in cmatches if 'virtualization' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'pci' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'pcie' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'audio' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'command-line' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'storage' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'audio' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'command-line' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'storage' in project.keywords])
     print('QEMU: ', len(resumes))
     return resumes
 
 def filterSugarLabsResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'Sugar Labs'] for (resume, projectList) in matches], [])
     resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'music' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'music' in project.keywords])
     print('Sugar Labs:', len(resumes))
     return resumes
 
@@ -266,28 +249,27 @@ def filterWikimediaResumes(matches, hitcount):
     vagrant = [resume for (resume, project) in cmatches if 'vagrant' in project.keywords]
     resumes.update(list(set(php) & set(vagrant)))
     resumes.update([resume for (resume, project) in cmatches if 'hungarian' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'mediawiki' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'wiki' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'wikipedia' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'localization' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'mediawiki' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'wiki' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'wikipedia' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'localization' in project.keywords])
     print('Wikimedia:', len(resumes))
     return resumes
 
 def filterYoctoResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'Yocto'] for (resume, projectList) in matches], [])
     #print('Yocto', len(cmatches))
-    #for k in projectsMay2017[14].keywords + projectsMay2017[14].optionalKeywords:
+    #for k in projectsMay2017[14].keywords:
     #    print('\t', k, len([resume for (resume, project) in cmatches
-    #                        if k.lower() in project.keywords or
-    #                        k.lower() in project.optionalKeywords
+    #                        if k.lower() in project.keywords
     #                       ]))
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'embedded' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'distro' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'beaglebone' in project.optionalKeywords])
-    resumes.update([resume for (resume, project) in cmatches if 'beagle bone' in project.optionalKeywords])
+    resumes.update([resume for (resume, project) in cmatches if 'beaglebone' in project.keywords])
+    resumes.update([resume for (resume, project) in cmatches if 'beagle bone' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'robotics' in project.keywords])
-    arduino = [resume for (resume, project) in cmatches if 'arduino' in project.optionalKeywords]
+    arduino = [resume for (resume, project) in cmatches if 'arduino' in project.keywords]
     linux = [resume for (resume, project) in cmatches if 'linux' in project.keywords]
     clanguage = [resume for (resume, project) in cmatches if 'c' in project.keywords]
     pythonlanguage = [resume for (resume, project) in cmatches if 'python' in project.keywords]
@@ -301,7 +283,6 @@ def filterYoctoResumes(matches, hitcount):
 
 def matchWithProjects(resumeFiles):
     goldresumes = []
-    silverresumes = []
     for resume in resumeFiles:
         matches = []
         for project in projectsMay2017:
@@ -309,47 +290,36 @@ def matchWithProjects(resumeFiles):
             for keyword in project.keywords:
                 if re.search(r'\b' + keyword + r'\b', resume.contents, flags=re.IGNORECASE):
                     keywordmatches.append(keyword.lower())
-            optkeywordmatches = []
-            for keyword in project.optionalKeywords:
-                try:
-                    if re.search(keyword, resume.contents, flags=re.IGNORECASE):
-                        optkeywordmatches.append(keyword.lower())
-                except:
-                    print('FAIL on', project.name, keyword)
-            if len(keywordmatches) != 0 or len(optkeywordmatches) != 0:
-                matches.append(outreachyProject(project.name, keywordmatches, optkeywordmatches))
+            if len(keywordmatches) != 0:
+                matches.append(outreachyProject(project.name, keywordmatches))
         if len(matches) != 0:
-            sorted(matches, key=lambda match: (len(match.keywords), len(match.optionalKeywords)))
-            if len(matches[0].keywords) != 0:
-                goldresumes.append((resume, matches))
-            else:
-                silverresumes.append((resume, matches))
+            sorted(matches, key=lambda match: len(match.keywords))
+            goldresumes.append((resume, matches))
             resume.projectMatches = matches
     print('Gold', len(goldresumes), 'matched')
-    print('Silver', len(silverresumes), 'matched')
 
     # Count what keyword caused this resume to match (not counting multiple matches)
     hitcount = Counter()
-    for resume in goldresumes + silverresumes:
+    for resume in goldresumes:
         allkeywords = set()
         for project in resume[1]:
-            for keyword in project.keywords + project.optionalKeywords:
+            for keyword in project.keywords:
                 allkeywords.add(keyword)
         hitcount.update(allkeywords)
-    print(hitcount)
+    #print(hitcount)
     filteredresumes = [
-        (projectsMay2017[2], filterCadastaResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[3], filterCephResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[4], filterDebianResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[5], filterDiscourseResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[6], filterFedoraResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[7], filterGNOMEResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[9], filterLagomeResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[10], filteroVirtResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[11], filterQEMUResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[12], filterSugarLabsResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[13], filterWikimediaResumes(goldresumes + silverresumes, hitcount)),
-        (projectsMay2017[14], filterYoctoResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[2], filterCadastaResumes(goldresumes, hitcount)),
+        (projectsMay2017[3], filterCephResumes(goldresumes, hitcount)),
+        (projectsMay2017[4], filterDebianResumes(goldresumes, hitcount)),
+        (projectsMay2017[5], filterDiscourseResumes(goldresumes, hitcount)),
+        (projectsMay2017[6], filterFedoraResumes(goldresumes, hitcount)),
+        (projectsMay2017[7], filterGNOMEResumes(goldresumes, hitcount)),
+        (projectsMay2017[9], filterLagomeResumes(goldresumes, hitcount)),
+        (projectsMay2017[10], filteroVirtResumes(goldresumes, hitcount)),
+        (projectsMay2017[11], filterQEMUResumes(goldresumes, hitcount)),
+        (projectsMay2017[12], filterSugarLabsResumes(goldresumes, hitcount)),
+        (projectsMay2017[13], filterWikimediaResumes(goldresumes, hitcount)),
+        (projectsMay2017[14], filterYoctoResumes(goldresumes, hitcount)),
     ]
     totalmatched = 0
     resumeset = set()
