@@ -23,8 +23,6 @@
 # This program expects you to have created a directory with identically
 # named PDF and text resume files. You can translate PDF files to text with:
 # $ for i in `ls *.pdf`; do pdftotext $i; done
-#
-#
 
 import argparse
 import csv
@@ -35,44 +33,15 @@ from collections import Counter
 
 class outreachyProject:
     name = ''
+    description = ''
     keywords = []
+    filterFunction = None
 
-    def __init__(self, name, keywords):
+    def __init__(self, name, description, keywords, function):
         self.name = name
+        self.description = description
         self.keywords = keywords
-
-projectsMay2017 = [
-    outreachyProject('Outreachy',
-                     ['open source', 'free software', 'Linux', 'Unix', 'Solaris']),
-    outreachyProject('Cadasta',
-                     ['Python', 'Django', 'JavaScript', 'HTML', 'OAuth', 'Selenium', 'front-end', 'back-end']),
-    outreachyProject('Ceph',
-                     ['Python', 'storage', 'file system', 'file systems', 'distributed system', 'distributed systems', 'C(?!\+\+)', 'C\+\+', 'Linux', 'probability', 'statistics', 'front-end', 'design', 'operating systems']),
-    outreachyProject('Debian',
-                     ['Debian', 'Linux', 'Greek', 'scientific', 'linear algebra', 'optimization', 'gcc', 'localization', 'documentation', 'internationalization', 'Python', 'Perl']),
-    outreachyProject('Discourse',
-                     ['rails', 'ember.js', 'JavaScript', 'OpenCollective', 'Slack', 'chat']),
-    outreachyProject('Fedora',
-                     ['design', 'graphics', 'artist', 'Fedora', 'Linux', 'storyboard', 'storyboarding', 'Inkscape', 'Scribus']),
-    outreachyProject('GNOME',
-                     ['GTK', 'C(?!\+\+)', 'Linux', 'Python', 'Vala', 'maps']),
-    outreachyProject('Lagome',
-                     ['Java', 'Scala', 'REST', 'reactive', 'microservice', 'microservices']),
-    outreachyProject('Linux kernel',
-                     ['Linux', 'operating systems', 'C(?!\+\+)', 'networking', 'memory']),
-    outreachyProject('oVirt',
-                     ['Python', 'JavaScript', 'distributed systems', 'distributed system', 'react', 'redux', 'ES6']),
-    outreachyProject('QEMU',
-                     ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU', 'audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
-    outreachyProject('Sugar Labs',
-                     ['JavaScript', 'documentation', 'design', 'graphics', 'music', 'audio']),
-    outreachyProject('Wikimedia',
-                     ['JavaScript', 'PHP', 'documentation', 'Hungarian', 'localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
-    outreachyProject('Wine',
-                     ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics', 'UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
-    outreachyProject('Yocto',
-                     ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto', 'openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
-]
+        self.filterFunction = function
 
 class resumeFile:
     """Information relating to a text and pdf resume pair."""
@@ -138,148 +107,126 @@ def searchForEmail(csvFile, resumeFiles):
                     files = files + ' <' + email +'>'
             print(row['Name'] + ' <' + row['Email'] + '> matches', files, 'with',)
 
-def filterCadastaResumes(matches, hitcount):
-    # Highest hit counts seem to be:
-    # C, Java, Python, HTML, C++, JavaScript, PHP
-    # REST
-    # UI, design,
-    # MySQL
-    # Linux, operating systems, networking, Unix
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Cadasta'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'django' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'selenium' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'oauth' in project.keywords])
-    print('Cadasta:', len(resumes))
+def filterIntersection(proj, matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList
+                     if project.name == proj.name and project.description == proj.description]
+                    for (resume, projectList) in matches], [])
+    resumes = set([resume for (resume, project) in cmatches if proj.keywords[0].lower() in project.keywords])
+    for keyword in proj.keywords[1:]:
+        resumes.intersection_update([resume for (resume, project) in cmatches if keyword.lower() in project.keywords])
+    print(len(resumes), '\t', proj.name, '\t', proj.description)
     return resumes
 
-def filterCephResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Ceph'] for (resume, projectList) in matches], [])
+def filterUnion(proj, matches, hitcount):
+    cmatches = sum([[(resume, project) for project in projectList
+                     if project.name == proj.name and project.description == proj.description]
+                    for (resume, projectList) in matches], [])
     resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'storage' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'file system' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'file systems' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'distributed system' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'distributed systems' in project.keywords])
-    print('Ceph:', len(resumes))
+    for keyword in proj.keywords:
+        resumes.update([resume for (resume, project) in cmatches if keyword.lower() in project.keywords])
+    print(len(resumes), '\t', proj.name, '\t', proj.description)
     return resumes
 
-def filterDebianResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Debian'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'debian' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'optimization' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'gcc' in project.keywords])
-    print('Debian:', len(resumes))
-    return resumes
-
-def filterDiscourseResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Discourse'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'rails' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'ember.js' in project.keywords])
-    print('Discourse:', len(resumes))
-    return resumes
-
-def filterFedoraResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Fedora'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'inkscape' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'storyboard' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'storyboarding' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'fedora' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'artist' in project.keywords])
-    print('Fedora:', len(resumes))
-    return resumes
-
-def filterGNOMEResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'GNOME'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'gtk' in project.keywords])
-    print('GNOME:', len(resumes))
-    return resumes
-
-def filterLagomeResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Lagome'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'scala' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'reactive' in project.keywords])
-    print('Lagome:', len(resumes))
-    return resumes
-
-def filteroVirtResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'oVirt'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'react' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'redux' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'es6' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'distributed system' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'distributed systems' in project.keywords])
-    print('oVirt:', len(resumes))
-    return resumes
-
-def filterQEMUResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'QEMU'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'virtualization' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'pci' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'pcie' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'audio' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'command-line' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'storage' in project.keywords])
-    print('QEMU: ', len(resumes))
-    return resumes
-
-def filterSugarLabsResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Sugar Labs'] for (resume, projectList) in matches], [])
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'music' in project.keywords])
-    print('Sugar Labs:', len(resumes))
-    return resumes
-
-def filterWikimediaResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Wikimedia'] for (resume, projectList) in matches], [])
-    resumes = set()
-    js = [resume for (resume, project) in cmatches if 'javascript' in project.keywords]
-    docs = [resume for (resume, project) in cmatches if 'documentation' in project.keywords]
-    # Look for people with both JavaScript and documentation experience
-    resumes.update(list(set(js) & set(docs)))
-    # PHP and vagrant experience
-    php = [resume for (resume, project) in cmatches if 'php' in project.keywords]
-    vagrant = [resume for (resume, project) in cmatches if 'vagrant' in project.keywords]
-    resumes.update(list(set(php) & set(vagrant)))
-    resumes.update([resume for (resume, project) in cmatches if 'hungarian' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'mediawiki' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'wiki' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'wikipedia' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'localization' in project.keywords])
-    print('Wikimedia:', len(resumes))
-    return resumes
-
-def filterYoctoResumes(matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList if project.name == 'Yocto'] for (resume, projectList) in matches], [])
-    #print('Yocto', len(cmatches))
-    #for k in projectsMay2017[14].keywords:
-    #    print('\t', k, len([resume for (resume, project) in cmatches
-    #                        if k.lower() in project.keywords
-    #                       ]))
-    resumes = set()
-    resumes.update([resume for (resume, project) in cmatches if 'embedded' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'distro' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'beaglebone' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'beagle bone' in project.keywords])
-    resumes.update([resume for (resume, project) in cmatches if 'robotics' in project.keywords])
-    arduino = [resume for (resume, project) in cmatches if 'arduino' in project.keywords]
-    linux = [resume for (resume, project) in cmatches if 'linux' in project.keywords]
-    clanguage = [resume for (resume, project) in cmatches if 'c' in project.keywords]
-    pythonlanguage = [resume for (resume, project) in cmatches if 'python' in project.keywords]
-    # Look for non-traditional embedded folks (people who have experienced
-    # both Arduino and have experience with either C or Linux or Python).
-    resumes.update(list(set(arduino) & set(linux)))
-    resumes.update(list(set(arduino) & set(clanguage)))
-    resumes.update(list(set(arduino) & set(pythonlanguage)))
-    print('Yocto:', len(resumes))
-    return resumes
+projectsMay2017 = [
+    #outreachyProject('Outreachy',
+    #                 ['open source', 'free software', 'Linux', 'Unix', 'Solaris']),
+    outreachyProject('Cadasta', 'enhancing user settings and creating a user dashboard',
+                     ['django'], filterUnion),
+    outreachyProject('Cadasta', 'adding additional login options',
+                     ['django', 'oauth'], filterUnion),
+    outreachyProject('Cadasta', 'improving automated test coverage',
+                     ['selenium'], filterUnion),
+    outreachyProject('Ceph', 'creating a root cause analysis tool for Linux distributed systems',
+                    ['Linux', 'distributed systems'], filterIntersection),
+    outreachyProject('Ceph', 'evaluating the performance of new reweight algorithms for balancing storage utilization across distributed systems',
+                    ['statistics', 'storage', 'linux'], filterIntersection),
+    outreachyProject('Ceph', 'design a status dashboard to visualize Ceph cluster statistics',
+                    ['python', 'linux', 'javascript', 'html5', 'css3'], filterIntersection),
+    outreachyProject('Ceph', 'identify performance degradation in nodes and automate cluster response',
+                    ['Linux', 'python', 'distributed systems'], filterIntersection),
+    outreachyProject('Ceph', 'design a simplified database backend for the Ceph Object Gateway',
+                    ['database', 'Linux', 'C\+\+'], filterIntersection),
+    outreachyProject('Ceph', 'port tests written in multiple languages to test Amazon S3 storage protocol and Openstack Swift storage',
+                    ['python', 'linux', 'storage'], filterIntersection),
+    outreachyProject('Debian', 'benchmarking scientific packages for general and architecture specific builds',
+                    ['linux', 'gcc'], filterIntersection),
+    outreachyProject('Debian', 'improving the Debian test database and website',
+                    ['linux', 'python', 'sql', 'shell'], filterIntersection),
+    outreachyProject('Debian', 'enhancing the Debian test website',
+                    ['html', 'css', 'linux', 'graphic'], filterIntersection),
+    outreachyProject('Discourse', 'enhancing their forum and chat web services',
+                    ['rails', 'javascript'], filterIntersection),
+    outreachyProject('Fedora', 'creating a coloring book to explain open source concepts',
+                     ['(inkscape|scribus)', '(storyboard|storyboarding)', 'graphic design'], filterUnion),
+    outreachyProject('GNOME', 'improving the recipes or maps applications',
+                     ['gtk'], filterUnion),
+    outreachyProject('Lagome', "creating an online action sample app to showcase Lagome's microservices",
+                     ['Scala'], filterIntersection),
+    outreachyProject('Linux kernel', 'analyze memory resource release operators and fix Linux kernel memory bugs',
+                     ['linux', 'operating systems', 'memory'], filterIntersection),
+    outreachyProject('Linux kernel', 'improve process ID allocation',
+                     ['linux', 'operating systems', 'kernel'], filterIntersection),
+    outreachyProject('Linux kernel', 'improve nftables (an in-kernel network filtration tool)',
+                     ['linux', 'operating systems', 'networking'], filterIntersection),
+    outreachyProject('Mozilla', 'PROJECT TBD',
+                     ['mozilla', 'firefox'], filterUnion),
+    outreachyProject('oVirt', 'implement oVirt integration tests using Lago and oVirt REST API',
+                     ['python', 'rest'], filterIntersection),
+    outreachyProject('oVirt', 'design an oVirt log analyzer for distributed systems',
+                     ['python', 'linux', 'distributed systems'], filterIntersection),
+    outreachyProject('oVirt', 'rewrite oVirt UI dialogs in modern JavaScript technologies',
+                     ['es6', 'react', 'redux'], filterUnion),
+    outreachyProject('QEMU', 'rework the QEMU audio backend',
+                     ['C(?!\+\+)', 'audio'], filterIntersection),
+    outreachyProject('QEMU', 'create a full and incremental disk backup tool',
+                     ['C(?!\+\+)', 'python', 'storage'], filterIntersection),
+    outreachyProject('QEMU', "refactor the block layer's I/O throttling and write notifiers",
+                     ['C(?!\+\+)', 'storage'], filterIntersection),
+    outreachyProject('QEMU', "code an emulated PCIe-to-PCI bridge",
+                     ['pci', 'pcie'], filterUnion),
+    outreachyProject('QEMU', "add x86 virtualization support on macOS using Hypervisor.framework",
+                     ['C(?!\+\+)', 'mac', 'virtualization'], filterIntersection),
+    outreachyProject('QEMU', "extend the current vhost-pci based inter-VM communication",
+                     ['C(?!\+\+)', 'pci'], filterIntersection),
+    outreachyProject('Sugar Labs', 'improve Music Blocks, a collection of programming tools for exploring fundamental musical concepts in an integrative and fun way',
+                     ['javascript', 'music'], filterIntersection),
+    outreachyProject('Wikimedia', 'write a Zotero translator and document process',
+                     ['javascript', 'documentation'], filterIntersection),
+    outreachyProject('Wikimedia', 'improve and fix bugs in the quiz extension',
+                     ['php', 'documentation'], filterIntersection),
+    outreachyProject('Wikimedia', 'create user guides to help with translation outreach',
+                     ['translation', 'localization'], filterUnion),
+    outreachyProject('Wine', 'implement resource editor and dialog editor',
+                     ['C(?!\+\+)', 'Windows', '(UI|UX)'], filterIntersection),
+    outreachyProject('Wine', 'implement missing D3DX9 APIs',
+                     ['C(?!\+\+)', 'computer graphics'], filterIntersection),
+    outreachyProject('Wine', 'implement Direct3D microbenchmarks',
+                     ['C(?!\+\+)', 'opengl'], filterIntersection),
+    outreachyProject('Wine', 'automated game benchmarks',
+                     ['C(?!\+\+)', 'game engine'], filterIntersection),
+    outreachyProject('Wine', 'port WineLib to a new architecture (such as PPC64, Sparc64, RISC-V, or x32)',
+                     ['PPC', 'PowerPC', 'Sparc', 'Sparc64', 'RISC-V'], filterUnion),
+    outreachyProject('Wine', 'improve the AppDB website, which lists Wine support for Windows programs',
+                     ['PPC', 'PowerPC', 'Sparc', 'Sparc64', 'RISC-V'], filterUnion),
+    outreachyProject('Xen Project', 'create golang bindings for libxl on the Xen hypervisor',
+                     ['go', 'C(?!\+\+)'], filterIntersection),
+    outreachyProject('Xen Project', 'create rust bindings for libxl on the Xen hypervisor',
+                     ['rust'], filterIntersection),
+    outreachyProject('Xen Project', 'KDD (Windows Debugger Stub) enhancements for the Xen hypervisor',
+                     ['C(?!\+\+)', 'windows', '(kernel|debugger)'], filterIntersection),
+    outreachyProject('Xen Project', 'fuzz testing the Xen hypercall interface',
+                     ['C(?!\+\+)', 'assembly', 'gcc'], filterIntersection),
+    outreachyProject('Xen Project', 'improving Mirage OS, a unikernel that runs on top of Xen',
+                     ['ocaml'], filterUnion),
+    outreachyProject('Xen Project', 'create a Xen code review dashboard',
+                     ['sql', 'javascript', 'html5', 'java'], filterIntersection),
+    #outreachyProject('Xen Project', 'implement tools for code standards checking using clang-format',
+    #                 ['clang'], filterIntersection),
+    outreachyProject('Xen Project', 'add more FreeBSD testing to osstest',
+                     ['freebsd', 'bsd', 'openbsd', 'netbsd', 'dragonfly'], filterUnion),
+    outreachyProject('Yocto', 'PROJECT TBD',
+                     ['C(?!\+\+)', 'python', '(distro|linux|yocto|openembedded)', '(embedded|robotics|beaglebone|beagle bone|minnow|minnowboard|arduino)'], filterIntersection),
+]
 
 def matchWithProjects(resumeFiles):
     goldresumes = []
@@ -291,7 +238,7 @@ def matchWithProjects(resumeFiles):
                 if re.search(r'\b' + keyword + r'\b', resume.contents, flags=re.IGNORECASE):
                     keywordmatches.append(keyword.lower())
             if len(keywordmatches) != 0:
-                matches.append(outreachyProject(project.name, keywordmatches))
+                matches.append(outreachyProject(project.name, project.description, keywordmatches, None))
         if len(matches) != 0:
             sorted(matches, key=lambda match: len(match.keywords))
             goldresumes.append((resume, matches))
@@ -306,21 +253,9 @@ def matchWithProjects(resumeFiles):
             for keyword in project.keywords:
                 allkeywords.add(keyword)
         hitcount.update(allkeywords)
-    #print(hitcount)
-    filteredresumes = [
-        (projectsMay2017[2], filterCadastaResumes(goldresumes, hitcount)),
-        (projectsMay2017[3], filterCephResumes(goldresumes, hitcount)),
-        (projectsMay2017[4], filterDebianResumes(goldresumes, hitcount)),
-        (projectsMay2017[5], filterDiscourseResumes(goldresumes, hitcount)),
-        (projectsMay2017[6], filterFedoraResumes(goldresumes, hitcount)),
-        (projectsMay2017[7], filterGNOMEResumes(goldresumes, hitcount)),
-        (projectsMay2017[9], filterLagomeResumes(goldresumes, hitcount)),
-        (projectsMay2017[10], filteroVirtResumes(goldresumes, hitcount)),
-        (projectsMay2017[11], filterQEMUResumes(goldresumes, hitcount)),
-        (projectsMay2017[12], filterSugarLabsResumes(goldresumes, hitcount)),
-        (projectsMay2017[13], filterWikimediaResumes(goldresumes, hitcount)),
-        (projectsMay2017[14], filterYoctoResumes(goldresumes, hitcount)),
-    ]
+    filteredresumes = []
+    for proj in projectsMay2017:
+        filteredresumes.append((proj, proj.filterFunction(proj, goldresumes, hitcount)))
     totalmatched = 0
     resumeset = set()
     for i in filteredresumes:
