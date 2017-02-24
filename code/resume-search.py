@@ -32,44 +32,24 @@ import re
 from collections import Counter
 
 class outreachyProject:
-    name = ''
-    description = ''
-    keywords = []
-    filterFunction = None
-
-    def __init__(self, name, description, keywords, function):
+    """Outreachy project name, description, keywords, and matching resume storage."""
+    def __init__(self, name, description, keywords):
         self.name = name
         self.description = description
         self.keywords = keywords
-        self.filterFunction = function
+        self.strongResumeMatches = []
+        self.weakResumeMatches = []
 
 class resumeFile:
     """Information relating to a text and pdf resume pair."""
-    path = ''
-    textFileName = ''
-    pdfFileName = ''
-    contents = ''
-    emails = []
-    projectMatches = []
-
-    def searchByName(fullName):
-        # Search for whole string
-        # Tokenize name, if in 'first last' format, search for last name
-        # If not in 'first last' format, search by longest string
-        # Return true if this is a match
-        return ''
-
-    def searchByEmail(email):
-        # Can we do a "smart" search that looks for similar words?
-        # Maybe use FuzzyWuzzy?
-        return ''
-
     def __init__(self, path, textFileName, contents):
         self.path = path
         self.textFileName = textFileName
         self.pdfFileName = os.path.splitext(textFileName)[0] + '.pdf'
         self.contents = contents
         self.emails = re.findall(r'[\w\.-\_\+]+@[\w\.-]+', contents)
+        self.strongProjectMatches = []
+        self.weakProjectMatches = []
 
 def readResumeFiles(directory):
     resumeFiles = []
@@ -131,137 +111,162 @@ projectsMay2017 = [
     #outreachyProject('Outreachy',
     #                 ['open source', 'free software', 'Linux', 'Unix', 'Solaris']),
     outreachyProject('Cadasta', 'enhancing user settings and creating a user dashboard',
-                     ['django'], filterUnion),
+                     ['django']),
     outreachyProject('Cadasta', 'adding additional login options',
-                     ['django', 'oauth'], filterUnion),
+                     ['django|oauth']),
     outreachyProject('Cadasta', 'improving automated test coverage',
-                     ['selenium'], filterUnion),
+                     ['selenium']),
     outreachyProject('Ceph', 'creating a root cause analysis tool for Linux distributed systems',
-                    ['Linux', 'distributed systems'], filterIntersection),
+                    ['Linux', 'distributed systems']),
     outreachyProject('Ceph', 'evaluating the performance of new reweight algorithms for balancing storage utilization across distributed systems',
-                    ['statistics', 'storage', 'linux'], filterIntersection),
+                    ['statistics', 'storage', 'linux']),
     outreachyProject('Ceph', 'design a status dashboard to visualize Ceph cluster statistics',
-                    ['python', 'linux', 'javascript', 'html5', 'css3'], filterIntersection),
+                    ['python', 'linux', 'javascript', 'html5', 'css3']),
     outreachyProject('Ceph', 'identify performance degradation in nodes and automate cluster response',
-                    ['Linux', 'python', 'distributed systems'], filterIntersection),
+                    ['Linux', 'python', 'distributed systems']),
     outreachyProject('Ceph', 'design a simplified database backend for the Ceph Object Gateway',
-                    ['database', 'Linux', 'C\+\+'], filterIntersection),
+                    ['database', 'Linux', 'C\+\+']),
     outreachyProject('Ceph', 'port tests written in multiple languages to test Amazon S3 storage protocol and Openstack Swift storage',
-                    ['python', 'linux', 'storage'], filterIntersection),
+                    ['python', 'linux', 'storage']),
     outreachyProject('Debian', 'benchmarking scientific packages for general and architecture specific builds',
-                    ['linux', 'gcc'], filterIntersection),
+                    ['linux', 'gcc']),
     outreachyProject('Debian', 'improving the Debian test database and website',
-                    ['linux', 'python', 'sql', 'shell'], filterIntersection),
+                    ['linux', 'python', 'sql', 'shell']),
     outreachyProject('Debian', 'enhancing the Debian test website',
-                    ['html', 'css', 'linux', 'graphic'], filterIntersection),
+                    ['html', 'css', 'linux', 'graphic']),
     outreachyProject('Discourse', 'enhancing their forum and chat web services',
-                    ['rails', 'javascript'], filterIntersection),
-    outreachyProject('Fedora', 'creating a coloring book to explain open source concepts',
-                     ['(inkscape|scribus)', '(storyboard|storyboarding)', 'graphic design'], filterUnion),
+                    ['rails', 'javascript']),
+    outreachyProject('Fedora', 'creating a coloring book to explain technical concepts',
+                     ['inkscape|scribus|storyboard|storyboarding|graphic design']),
     outreachyProject('GNOME', 'improving the recipes or maps applications',
-                     ['gtk'], filterUnion),
+                     ['gtk']),
     outreachyProject('Lagome', "creating an online action sample app to showcase Lagome's microservices",
-                     ['Scala'], filterIntersection),
+                     ['Scala']),
     outreachyProject('Linux kernel', 'analyze memory resource release operators and fix Linux kernel memory bugs',
-                     ['linux', 'operating systems', 'memory'], filterIntersection),
+                     ['linux', 'operating systems', 'memory']),
     outreachyProject('Linux kernel', 'improve process ID allocation',
-                     ['linux', 'operating systems', 'kernel'], filterIntersection),
+                     ['linux', 'operating systems', 'kernel']),
     outreachyProject('Linux kernel', 'improve nftables (an in-kernel network filtration tool)',
-                     ['linux', 'operating systems', 'networking'], filterIntersection),
+                     ['linux', 'operating systems', 'networking']),
     outreachyProject('Mozilla', 'PROJECT TBD',
-                     ['mozilla', 'firefox'], filterUnion),
+                     ['mozilla|firefox']),
     outreachyProject('oVirt', 'implement oVirt integration tests using Lago and oVirt REST API',
-                     ['python', 'rest'], filterIntersection),
+                     ['python', 'rest']),
     outreachyProject('oVirt', 'design an oVirt log analyzer for distributed systems',
-                     ['python', 'linux', 'distributed systems'], filterIntersection),
+                     ['python', 'linux', 'distributed systems']),
     outreachyProject('oVirt', 'rewrite oVirt UI dialogs in modern JavaScript technologies',
-                     ['es6', 'react', 'redux'], filterUnion),
+                     ['es6|react|redux']),
     outreachyProject('QEMU', 'rework the QEMU audio backend',
-                     ['C(?!\+\+)', 'audio'], filterIntersection),
+                     ['C(?!\+\+)', 'audio']),
     outreachyProject('QEMU', 'create a full and incremental disk backup tool',
-                     ['C(?!\+\+)', 'python', 'storage'], filterIntersection),
+                     ['C(?!\+\+)', 'python', 'storage']),
     outreachyProject('QEMU', "refactor the block layer's I/O throttling and write notifiers",
-                     ['C(?!\+\+)', 'storage'], filterIntersection),
+                     ['C(?!\+\+)', 'storage']),
     outreachyProject('QEMU', "code an emulated PCIe-to-PCI bridge",
-                     ['pci', 'pcie'], filterUnion),
+                     ['pci|pcie']),
     outreachyProject('QEMU', "add x86 virtualization support on macOS using Hypervisor.framework",
-                     ['C(?!\+\+)', 'mac', 'virtualization'], filterIntersection),
+                     ['C(?!\+\+)', 'mac', 'virtualization']),
     outreachyProject('QEMU', "extend the current vhost-pci based inter-VM communication",
-                     ['C(?!\+\+)', 'pci'], filterIntersection),
+                     ['C(?!\+\+)', 'pci']),
     outreachyProject('Sugar Labs', 'improve Music Blocks, a collection of programming tools for exploring fundamental musical concepts in an integrative and fun way',
-                     ['javascript', 'music'], filterIntersection),
+                     ['javascript', 'music']),
     outreachyProject('Wikimedia', 'write a Zotero translator and document process',
-                     ['javascript', 'documentation'], filterIntersection),
+                     ['javascript', 'documentation']),
     outreachyProject('Wikimedia', 'improve and fix bugs in the quiz extension',
-                     ['php', 'documentation'], filterIntersection),
+                     ['php', 'documentation']),
     outreachyProject('Wikimedia', 'create user guides to help with translation outreach',
-                     ['translation', 'localization'], filterUnion),
+                     ['translation|localization']),
     outreachyProject('Wine', 'implement resource editor and dialog editor',
-                     ['C(?!\+\+)', 'Windows', '(UI|UX)'], filterIntersection),
+                     ['C(?!\+\+)', 'Windows', 'UI|UX']),
     outreachyProject('Wine', 'implement missing D3DX9 APIs',
-                     ['C(?!\+\+)', 'computer graphics'], filterIntersection),
+                     ['C(?!\+\+)', 'computer graphics']),
     outreachyProject('Wine', 'implement Direct3D microbenchmarks',
-                     ['C(?!\+\+)', 'opengl'], filterIntersection),
+                     ['C(?!\+\+)', 'opengl']),
     outreachyProject('Wine', 'automated game benchmarks',
-                     ['C(?!\+\+)', 'game engine'], filterIntersection),
+                     ['C(?!\+\+)', 'game engine']),
     outreachyProject('Wine', 'port WineLib to a new architecture (such as PPC64, Sparc64, RISC-V, or x32)',
-                     ['PPC', 'PowerPC', 'Sparc', 'Sparc64', 'RISC-V'], filterUnion),
+                     ['PPC|PowerPC|Sparc|Sparc64|RISC-V']),
     outreachyProject('Wine', 'improve the AppDB website, which lists Wine support for Windows programs',
-                     ['PPC', 'PowerPC', 'Sparc', 'Sparc64', 'RISC-V'], filterUnion),
+                     ['php', 'html', 'mysql']),
     outreachyProject('Xen Project', 'create golang bindings for libxl on the Xen hypervisor',
-                     ['go', 'C(?!\+\+)'], filterIntersection),
+                     ['go', 'C(?!\+\+)']),
     outreachyProject('Xen Project', 'create rust bindings for libxl on the Xen hypervisor',
-                     ['rust'], filterIntersection),
+                     ['rust']),
     outreachyProject('Xen Project', 'KDD (Windows Debugger Stub) enhancements for the Xen hypervisor',
-                     ['C(?!\+\+)', 'windows', '(kernel|debugger)'], filterIntersection),
+                     ['C(?!\+\+)', 'windows', 'kernel|debugger']),
     outreachyProject('Xen Project', 'fuzz testing the Xen hypercall interface',
-                     ['C(?!\+\+)', 'assembly', 'gcc'], filterIntersection),
+                     ['C(?!\+\+)', 'assembly', 'gcc']),
     outreachyProject('Xen Project', 'improving Mirage OS, a unikernel that runs on top of Xen',
-                     ['ocaml'], filterUnion),
+                     ['ocaml']),
     outreachyProject('Xen Project', 'create a Xen code review dashboard',
-                     ['sql', 'javascript', 'html5', 'java'], filterIntersection),
+                     ['sql', 'javascript', 'html5', 'java']),
     #outreachyProject('Xen Project', 'implement tools for code standards checking using clang-format',
-    #                 ['clang'], filterIntersection),
+    #                 ['clang']),
     outreachyProject('Xen Project', 'add more FreeBSD testing to osstest',
-                     ['freebsd', 'bsd', 'openbsd', 'netbsd', 'dragonfly'], filterUnion),
+                     ['freebsd|bsd|openbsd|netbsd|dragonfly']),
     outreachyProject('Yocto', 'PROJECT TBD',
-                     ['C(?!\+\+)', 'python', '(distro|linux|yocto|openembedded)', '(embedded|robotics|beaglebone|beagle bone|minnow|minnowboard|arduino)'], filterIntersection),
+                     ['C(?!\+\+)', 'python', 'distro|linux|yocto|openembedded', 'embedded|robotics|beaglebone|beagle bone|minnow|minnowboard|arduino']),
 ]
+
+# We have two types of resumes:
+# 1. They matched *some* but not all of the important keywords for a project.
+# 2. They matches all of the keywords we need.
+def matchResumes(resumeFiles):
+    for resume in resumeFiles:
+        for project in projectsMay2017:
+            matches = [set(re.findall(r'\b(?:' + keyword + r')\b', resume.contents, flags=re.IGNORECASE)) for keyword in project.keywords]
+            # New syntax for me!
+            # * takes a list and expands it to arguments to a function.
+            # ** takes a dictionary and expands it to key-value arguments to a function.
+            # union combines the list of sets and removes duplicates.
+            keywords = set.union(*matches)
+            if all(matches):
+                resume.strongProjectMatches.append((project, keywords))
+                project.strongResumeMatches.append(resume)
+            elif any(matches):
+                resume.weakProjectMatches.append((project, keywords))
+                project.weakResumeMatches.append(resume)
 
 def matchWithProjects(resumeFiles):
     goldresumes = []
-    for resume in resumeFiles:
-        matches = []
-        for project in projectsMay2017:
-            keywordmatches = []
-            for keyword in project.keywords:
-                if re.search(r'\b' + keyword + r'\b', resume.contents, flags=re.IGNORECASE):
-                    keywordmatches.append(keyword.lower())
-            if len(keywordmatches) != 0:
-                matches.append(outreachyProject(project.name, project.description, keywordmatches, None))
-        if len(matches) != 0:
-            sorted(matches, key=lambda match: len(match.keywords))
-            goldresumes.append((resume, matches))
-            resume.projectMatches = matches
-    print('Gold', len(goldresumes), 'matched')
+    matchResumes(resumeFiles)
 
     # Count what keyword caused this resume to match (not counting multiple matches)
-    hitcount = Counter()
-    for resume in goldresumes:
-        allkeywords = set()
-        for project in resume[1]:
-            for keyword in project.keywords:
-                allkeywords.add(keyword)
-        hitcount.update(allkeywords)
-    filteredresumes = []
-    for proj in projectsMay2017:
-        filteredresumes.append((proj, proj.filterFunction(proj, goldresumes, hitcount)))
-    totalmatched = 0
-    resumeset = set()
-    for i in filteredresumes:
-        totalmatched = totalmatched + len(i[1])
-        resumeset.update(i[1])
-    print('Resumes to review:', len(resumeset))
+    #hitcount = Counter()
+    #for resume in resumeFiles:
+    #    allkeywords = set()
+    #    for project, keywords in resume.strongProjectMatches + resume.weakProjectMatches:
+    #        allkeywords.update(keywords)
+    #        for keyword in keywords:
+    #            allkeywords.add(keyword)
+    #    hitcount.update(allkeywords)
+
+    for project in projectsMay2017:
+        print(len(project.strongResumeMatches), '\t', project.name, '\t', project.description)
+
+    print('Resumes to review:', len([resume for resume in resumeFiles if len(resume.strongProjectMatches) > 0]))
+
+    print('Resumes with strong matches:')
+    for i in range(1, 9):
+        resumeCount = [resume for resume in resumeFiles if len(resume.strongProjectMatches) == i]
+        if resumeCount:
+            print(len(resumeCount), 'with', i, 'strong matches')
+
+    resumeCount = [resume for resume in resumeFiles if len(resume.strongProjectMatches) > 9]
+    if resumeCount:
+        print(len(resumeCount), 'with > 10 matches')
+
+    print('Resumes with weak matches:')
+    for i in range(1, 9):
+        resumeCount = [resume for resume in resumeFiles
+                       if not resume.strongProjectMatches and len(resume.weakProjectMatches) == i]
+        if resumeCount:
+            print(len(resumeCount), 'with', i, 'weak matches')
+
+    resumeCount = [resume for resume in resumeFiles
+                   if not resume.strongProjectMatches and len(resume.weakProjectMatches) > 9]
+    if resumeCount:
+        print(len(resumeCount), 'with > 10 matches')
 
 def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
