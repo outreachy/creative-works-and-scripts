@@ -44,21 +44,51 @@ class outreachyProject:
         self.optionalKeywords = optional
 
 projectsMay2017 = [
-    outreachyProject('Outreachy', ['open source', 'free software'], ['Linux', 'Unix', 'Solaris']),
-    outreachyProject('Cadasta', ['Python', 'Django', 'JavaScript', 'HTML', 'OAuth', 'Selenium'], ['front-end', 'back-end']),
-    outreachyProject('Ceph', ['Python', 'storage', 'file system', 'file systems', 'distributed system', 'distributed systems'], ['C(?!\+\+)', 'C\+\+', 'Linux', 'probability', 'statistics', 'front-end', 'design', 'operating systems']),
-    outreachyProject('Debian', ['Debian', 'Linux', 'Greek', 'scientific', 'linear algebra', 'optimization', 'gcc', 'localization', 'documentation', 'internationalization'], ['Python', 'Perl']),
-    outreachyProject('Discourse', ['rails', 'ember.js', 'JavaScript'], ['OpenCollective', 'Slack', 'chat']),
-    outreachyProject('Fedora', ['design', 'graphics', 'artist', 'Fedora', 'Linux', 'storyboard', 'storyboarding'], ['Inkscape', 'Scribus']),
-    outreachyProject('GNOME', ['GTK', 'C(?!\+\+)', 'Linux'], ['Python', 'Vala', 'maps']),
-    outreachyProject('Lagome', ['Java'], ['Scala', 'REST', 'reactive', 'microservice', 'microservices']),
-    outreachyProject('Linux kernel', ['Linux', 'operating systems', 'C(?!\+\+)'], ['networking', 'memory']),
-    outreachyProject('oVirt', ['Python', 'JavaScript', 'distributed systems', 'distributed system'], ['react', 'redux', 'ES6']),
-    outreachyProject('QEMU', ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU'], ['audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
-    outreachyProject('Sugar Labs', ['JavaScript', 'documentation'], ['design', 'graphics', 'music', 'audio']),
-    outreachyProject('Wikimedia', ['JavaScript', 'PHP', 'documentation', 'Hungarian'], ['localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
-    outreachyProject('Wine', ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics'], ['UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
-    outreachyProject('Yocto', ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto'], ['openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
+    outreachyProject('Outreachy',
+                     ['open source', 'free software'],
+                     ['Linux', 'Unix', 'Solaris']),
+    outreachyProject('Cadasta',
+                     ['Python', 'Django', 'JavaScript', 'HTML', 'OAuth', 'Selenium'],
+                     ['front-end', 'back-end']),
+    outreachyProject('Ceph',
+                     ['Python', 'storage', 'file system', 'file systems', 'distributed system', 'distributed systems'],
+                     ['C(?!\+\+)', 'C\+\+', 'Linux', 'probability', 'statistics', 'front-end', 'design', 'operating systems']),
+    outreachyProject('Debian',
+                     ['Debian', 'Linux', 'Greek', 'scientific', 'linear algebra', 'optimization', 'gcc', 'localization', 'documentation', 'internationalization'],
+                     ['Python', 'Perl']),
+    outreachyProject('Discourse',
+                     ['rails', 'ember.js', 'JavaScript'],
+                     ['OpenCollective', 'Slack', 'chat']),
+    outreachyProject('Fedora',
+                     ['design', 'graphics', 'artist', 'Fedora', 'Linux', 'storyboard', 'storyboarding'],
+                     ['Inkscape', 'Scribus']),
+    outreachyProject('GNOME',
+                     ['GTK', 'C(?!\+\+)', 'Linux'],
+                     ['Python', 'Vala', 'maps']),
+    outreachyProject('Lagome',
+                     ['Java'],
+                     ['Scala', 'REST', 'reactive', 'microservice', 'microservices']),
+    outreachyProject('Linux kernel',
+                     ['Linux', 'operating systems', 'C(?!\+\+)'],
+                     ['networking', 'memory']),
+    outreachyProject('oVirt',
+                     ['Python', 'JavaScript', 'distributed systems', 'distributed system'],
+                     ['react', 'redux', 'ES6']),
+    outreachyProject('QEMU',
+                     ['C(?!\+\+)', 'Python', 'virtualization', 'QEMU'],
+                     ['audio', 'GStreamer', 'Linux', 'PCI', 'PCIe', 'PCI Express', 'block layer', 'hypervisor', 'command-line', 'shell', 'storage']),
+    outreachyProject('Sugar Labs',
+                     ['JavaScript', 'documentation'],
+                     ['design', 'graphics', 'music', 'audio']),
+    outreachyProject('Wikimedia',
+                     ['JavaScript', 'PHP', 'documentation', 'Hungarian'],
+                     ['localization', 'MediaWiki', 'wiki', 'wikipedia', 'vagrant']),
+    outreachyProject('Wine',
+                     ['C(?!\+\+)', 'Windows programming', 'Win32', 'computer graphics'],
+                     ['UI', 'Direct3D', 'OpenGL', 'DirectDraw', 'scripting', 'PPC64', 'PowerPC', 'Sparc64', 'RISC-V', 'x32', 'dll', 'PHP', 'HTML', 'MySQL']),
+    outreachyProject('Yocto',
+                     ['C(?!\+\+)', 'python', 'embedded', 'robotics', 'distro', 'linux', 'yocto'],
+                     ['openembedded', 'beaglebone', 'beagle bone', 'minnow', 'minnowboard', 'arduino']),
 ]
 
 class resumeFile:
@@ -68,6 +98,7 @@ class resumeFile:
     pdfFileName = ''
     contents = ''
     emails = []
+    projectMatches = []
 
     def searchByName(fullName):
         # Search for whole string
@@ -156,6 +187,7 @@ def filterDebianResumes(matches, hitcount):
     resumes.update([resume for (resume, project) in cmatches if 'debian' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'optimization' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'gcc' in project.keywords])
+    print('Debian:', len(resumes))
     return resumes
 
 def filterDiscourseResumes(matches, hitcount):
@@ -163,17 +195,11 @@ def filterDiscourseResumes(matches, hitcount):
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'rails' in project.keywords])
     resumes.update([resume for (resume, project) in cmatches if 'ember.js' in project.keywords])
-    print('Debian:', len(resumes))
+    print('Discourse:', len(resumes))
     return resumes
 
 def filterFedoraResumes(matches, hitcount):
     cmatches = sum([[(resume, project) for project in projectList if project.name == 'Fedora'] for (resume, projectList) in matches], [])
-    print('Fedora', len(cmatches))
-    for k in projectsMay2017[5].keywords + projectsMay2017[5].optionalKeywords:
-        print('\t', k, len([resume for (resume, project) in cmatches
-                            if k.lower() in project.keywords or
-                            k.lower() in project.optionalKeywords
-                           ]))
     resumes = set()
     resumes.update([resume for (resume, project) in cmatches if 'inkscape' in project.optionalKeywords])
     resumes.update([resume for (resume, project) in cmatches if 'storyboard' in project.keywords])
@@ -298,6 +324,7 @@ def matchWithProjects(resumeFiles):
                 goldresumes.append((resume, matches))
             else:
                 silverresumes.append((resume, matches))
+            resume.projectMatches = matches
     print('Gold', len(goldresumes), 'matched')
     print('Silver', len(silverresumes), 'matched')
 
@@ -310,18 +337,26 @@ def matchWithProjects(resumeFiles):
                 allkeywords.add(keyword)
         hitcount.update(allkeywords)
     print(hitcount)
-    filterCadastaResumes(goldresumes + silverresumes, hitcount)
-    filterCephResumes(goldresumes + silverresumes, hitcount)
-    filterDebianResumes(goldresumes + silverresumes, hitcount)
-    filterDiscourseResumes(goldresumes + silverresumes, hitcount)
-    filterFedoraResumes(goldresumes + silverresumes, hitcount)
-    filterGNOMEResumes(goldresumes + silverresumes, hitcount)
-    filterLagomeResumes(goldresumes + silverresumes, hitcount)
-    filteroVirtResumes(goldresumes + silverresumes, hitcount)
-    filterQEMUResumes(goldresumes + silverresumes, hitcount)
-    filterSugarLabsResumes(goldresumes + silverresumes, hitcount)
-    filterWikimediaResumes(goldresumes + silverresumes, hitcount)
-    filterYoctoResumes(goldresumes + silverresumes, hitcount)
+    filteredresumes = [
+        (projectsMay2017[2], filterCadastaResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[3], filterCephResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[4], filterDebianResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[5], filterDiscourseResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[6], filterFedoraResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[7], filterGNOMEResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[9], filterLagomeResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[10], filteroVirtResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[11], filterQEMUResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[12], filterSugarLabsResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[13], filterWikimediaResumes(goldresumes + silverresumes, hitcount)),
+        (projectsMay2017[14], filterYoctoResumes(goldresumes + silverresumes, hitcount)),
+    ]
+    totalmatched = 0
+    resumeset = set()
+    for i in filteredresumes:
+        totalmatched = totalmatched + len(i[1])
+        resumeset.update(i[1])
+    print('Resumes to review:', len(resumeset))
 
 def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
