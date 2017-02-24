@@ -87,26 +87,6 @@ def searchForEmail(csvFile, resumeFiles):
                     files = files + ' <' + email +'>'
             print(row['Name'] + ' <' + row['Email'] + '> matches', files, 'with',)
 
-def filterIntersection(proj, matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList
-                     if project.name == proj.name and project.description == proj.description]
-                    for (resume, projectList) in matches], [])
-    resumes = set([resume for (resume, project) in cmatches if proj.keywords[0].lower() in project.keywords])
-    for keyword in proj.keywords[1:]:
-        resumes.intersection_update([resume for (resume, project) in cmatches if keyword.lower() in project.keywords])
-    print(len(resumes), '\t', proj.name, '\t', proj.description)
-    return resumes
-
-def filterUnion(proj, matches, hitcount):
-    cmatches = sum([[(resume, project) for project in projectList
-                     if project.name == proj.name and project.description == proj.description]
-                    for (resume, projectList) in matches], [])
-    resumes = set()
-    for keyword in proj.keywords:
-        resumes.update([resume for (resume, project) in cmatches if keyword.lower() in project.keywords])
-    print(len(resumes), '\t', proj.name, '\t', proj.description)
-    return resumes
-
 projectsMay2017 = [
     #outreachyProject('Outreachy',
     #                 ['open source', 'free software', 'Linux', 'Unix', 'Solaris']),
