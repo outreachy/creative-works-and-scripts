@@ -391,6 +391,12 @@ http://exploreshaifali.github.io/2015/06/08/getting-into-summer-of-code-programs
 Sarah Sharp
 '''
 
+# TODO:
+# 1. Remove the generic description when we have a good resume match; it's more personal.
+# 2. Reflow all text to 72 character width (sometimes 80-char wide gets wrapped).
+# 3. Dec to March, needs fixed to May to August and December to March.
+# 4. Doodle URL on newline.
+
 def writeStrongInvitation(emaildir, resume, boothlist):
     matches = sorted(resume.strongProjectMatches, key=lambda match: len(match[1]))
     project, keywords = matches[0]
