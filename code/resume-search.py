@@ -158,6 +158,12 @@ projectsMay2017 = [
     outreachyProject('Linux kernel', None,
                      'improve nftables (an in-kernel network filtration tool)',
                      ['linux', 'operating systems', 'networking'], ['linux', 'operating systems', 'networking']),
+    outreachyProject('Linux kernel', None,
+                     'write a driver for a sensor using the Industrial I/O interface',
+                     ['linux', 'operating systems', 'embedded'], ['linux', 'operating systems', 'embedded']),
+    outreachyProject('Linux kernel', None,
+                     'improve documentation build system and translate docs into ReStructured Text format',
+                     ['perl', 'python', 'operating systems'], ['operating systems']),
 
     outreachyProject('Mozilla', None, None,
                      ['mozilla|firefox'], ['mozilla', 'firefox']),
