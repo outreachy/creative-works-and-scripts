@@ -30,6 +30,7 @@ import os
 import re
 import textwrap
 #from fuzzywuzzy import fuzz
+from enum import Enum
 from collections import Counter
 from shutil import copyfile
 
@@ -57,7 +58,9 @@ class resumeFile:
 
 def readResumeFiles(directory):
     resumeFiles = []
-    for f in [l for l in os.listdir(directory) if l.endswith('.txt')]:
+    for f in [l for l in os.listdir(directory) if l.endswith('.txt') and
+              not l.endswith('-email.txt') and
+              not l.endswith('-email-tam.txt')]:
         with open(os.path.join(directory, f), 'r') as resume:
             contents = resume.read()
         resumeFiles.append(resumeFile(directory, f, contents))
@@ -69,7 +72,12 @@ def readResumeFiles(directory):
         for email in r.emails:
             line = line + ' ' + email
         line = line + ' ' + str(len(r.contents))
-    #print(len([r for r in resumeFiles if re.search('Linux', r.contents)]), "resumes have the word name")
+    # The first email is usually the actual email.
+    emails = [resume.emails[0] for resume in resumeFiles if resume.emails]
+    edups = [item for item, count in Counter(emails).items() if count > 1]
+    for email in edups:
+        pdfs = [resume.pdfFileName for resume in resumeFiles if resume.emails and resume.emails[0] == email]
+        print('Email duplicate:', email, ' '.join(pdfs))
     return resumeFiles
 
 def searchForEmail(csvFile, resumeFiles):
@@ -128,10 +136,13 @@ projectsMay2017 = [
                     ['linux', 'gcc'], ['linux']),
     outreachyProject('Debian', 'a Linux distribution',
                      'improve the Debian test database and website',
-                    ['linux', 'python', 'sql', 'shell'], ['linux']),
+                    ['linux', 'python', 'sql', 'shell|bash|command-line'], ['linux', 'command-line']),
     outreachyProject('Debian', 'a Linux distribution',
                      'enhance the Debian test website',
                     ['html', 'css', 'linux', 'graphic'], ['linux', 'graphic']),
+    outreachyProject('Debian', 'a Linux distribution',
+                     'Add secure mail server support to FreedomBox (a web server for small machines)',
+                    ['python', 'django', 'shell|bash|command-line'], ['command-line']),
 
     outreachyProject('Discourse', 'chat forum software',
                      'enhance their forum and chat web services',
@@ -140,6 +151,9 @@ projectsMay2017 = [
     outreachyProject('Fedora', 'a Linux distribution',
                      'create a coloring book to explain technical concepts',
                      ['inkscape|scribus|storyboard|storyboarding|graphic design'], ['graphic design', 'storyboard', 'storyboarding']),
+    outreachyProject('Fedora', 'a Linux distribution',
+                     'improve Bodhi, the web-system that publishes updates for Fedora',
+                     ['python', 'javascript|html|css|linux|fedora'], []),
 
     outreachyProject('GNOME', None,
                      'improve the recipes or maps applications',
@@ -147,7 +161,7 @@ projectsMay2017 = [
 
     outreachyProject('Lagome', 'a microservices platform',
                      "create an online auction sample app to showcase Lagome's microservices",
-                     ['Scala'], []),
+                     ['java', 'scala|react|reactive'], ['react', 'reactive']),
 
     outreachyProject('Linux kernel', None,
                      'analyze memory resource release operators and fix Linux kernel memory bugs',
@@ -165,8 +179,13 @@ projectsMay2017 = [
                      'improve documentation build system and translate docs into ReStructured Text format',
                      ['perl', 'python', 'operating systems'], ['operating systems']),
 
-    outreachyProject('Mozilla', None, None,
+    outreachyProject('Mozilla', None,
+                     None,
                      ['mozilla|firefox'], ['mozilla', 'firefox']),
+
+    outreachyProject('OpenStack', 'software for cloud deployment and management',
+                     'add continuous integration for OpenStack Identity Service (keystone) LDAP support',
+                     ['python', 'shell|bash|command-line'], ['command-line']),
 
     outreachyProject('oVirt', 'virtualization management software',
                      'implement oVirt integration tests using Lago and the oVirt REST API',
@@ -210,6 +229,12 @@ projectsMay2017 = [
     outreachyProject('Wikimedia', 'a non-profit known for Wikipedia',
                      'create user guides to help with translation outreach',
                      ['translation|localization'], ['translation', 'localization']),
+    outreachyProject('Wikimedia', 'a non-profit known for Wikipedia',
+                     'implement automatic edits on wikis connected to the Programs & Events Dashboard',
+                     ['rails'], []),
+    outreachyProject('Wikimedia', 'a non-profit known for Wikipedia',
+                     'implement an automatic article feedback feature for the Programs & Events Dashboard',
+                     ['rails'], []),
 
     outreachyProject('Wine', 'a tool to run Windows programs on Linux or BSD',
                      'implement a resource editor and dialog editor',
@@ -320,10 +345,11 @@ Subject: Internship opportunities in open source
 
 noBooth = '''Greetings!
 
-I'm Sarah Sharp, and we both attended the Tapia conference last September. I'm
-a coordinator for Outreachy, an internship program for people traditionally
-underrepresented in tech. We offer remote, three-month internships with a
-$5,500 stipend and a $500 conference travel stipend.
+I'm Sarah Sharp, and we both attended the Tapia conference last
+September. I'm a coordinator for Outreachy, an internship program for
+people traditionally underrepresented in tech. We offer remote,
+three-month internships with a $5,500 stipend and a $500 conference
+travel stipend.
 
 '''
 
@@ -332,65 +358,70 @@ $5,500 stipend and a $500 conference travel stipend.
 # What about the students at universities hosting introductory sessions?
 atBooth = '''Greetings!
 
-I'm Sarah Sharp, and we met when you stopped by the Outreachy booth at the
-Tapia conference last September. I'm a coordinator for Outreachy, an internship
-program for people traditionally underrepresented in tech. We offer remote,
-three-month internships with a $5,500 stipend and a $500 conference travel
-stipend.
+I'm Sarah Sharp, and we met when you stopped by the Outreachy booth at
+the Tapia conference last September. I'm a coordinator for Outreachy, an
+internship program for people traditionally underrepresented in tech. We
+offer remote, three-month internships with a $5,500 stipend and a $500
+conference travel stipend.
 
 '''
 
 generalInfo = '''https://wiki.gnome.org/Outreachy
 
-Interns work remotely with experienced mentors in free and open source software
-projects.  The internships are often focused on programming tasks, but some
-projects offer internships in user experience design, graphic design,
-documentation, web development, marketing, translation, and more.
+Interns work remotely with experienced mentors in free and open source
+software projects.  The internships are often focused on programming
+tasks, but some projects offer internships in user experience design,
+graphic design, documentation, web development, marketing, translation,
+and more.
 
 '''
 
-moreInfo = '''Our full list of internship projects (which will also list Mozilla next week) 
-is available at:
+moreInfo = '''Our full list of internship projects (which will soon list Mozilla) is
+available at:
 
 https://wiki.gnome.org/Outreachy/2017/MayAugust
 
-The Outreachy internships run from May 30 to August 30.  More details and
-eligibility criteria can be found here:
+The Outreachy internships run from May 30 to August 30.  More details
+and eligibility criteria can be found here:
 
 https://wiki.gnome.org/Outreachy#Program_Details
 
-During the application period (February 16 to March 30), potential interns are
-expected to make contact with one or more of the open source project mentors,
-and make a contribution to the project. We find the strongest applicants
-contact mentors early, ask a lot of questions, and continually submit small
-contributions throughout the application period.
+During the application period (February 16 to March 30), potential
+interns are expected to make contact with one or more of the open source
+project mentors, and make a contribution to the project. We find the
+strongest applicants contact mentors early, ask a lot of questions, and
+continually submit small contributions throughout the application
+period.
 
-Outreachy offers internships twice a year (May to Aug, and Dec to March).
-If you're unavailable for the summer internship, you can sign up for our
-mailing list to receive a notification when the next round opens:
+Outreachy offers internships twice a year (May - August and
+December - March).  If you're unavailable for the summer internship,
+you can sign up for our mailing list to receive a notification when
+the next round opens:
 
 https://lists.sfconservancy.org/mailman/listinfo/outreachy-announce
 
-Please let me know if you have any questions about the program. The Outreachy
-coordinators (Marina, Karen, Sarah, Cindy, and Tony) can all be reached at
-outreachy-admins@gnome.org You can contact all organization mentors by
-emailing outreachy-list@gnome.org
+Please let me know if you have any questions about the program. The
+Outreachy coordinators (Marina, Karen, Sarah, Cindy, and Tony) can all
+be reached at outreachy-admins@gnome.org You can contact all
+organization mentors by emailing outreachy-list@gnome.org
 
 '''
 
-noMeetingInfo = '''We're happy to have a virtual meeting at your college to introduce Outreachy.
-You can see my availability and schedule at http://doodle.com/sarahsharp
+noMeetingInfo = '''We're happy to have a virtual meeting at your college to introduce
+Outreachy.  You can see my availability and schedule at
+
+http://doodle.com/sarahsharp
 
 '''
 
 # emails ending with tamu.edu or containing the words 'Texas A&M'
-meetingInfo = '''Outreachy will be hosting a virtual introductory session at Texas A&M
-on March 1, 7-8:30pm. Contact Dario Sanchez for details.
+meetingInfo = '''Outreachy will be hosting a virtual introductory session at Texas A&M on
+March 1, 7-8:30pm. Contact Dario Sanchez for details.
 
 '''
 
-pleaseApply = '''I hope you'll apply! If you feel uncertain about applying, please read these
-words of advice from a former Outreachy intern:
+pleaseApply = '''I hope you'll apply! If you feel uncertain about applying, please read
+these words of advice from a former Outreachy intern:
 
 http://exploreshaifali.github.io/2015/06/08/getting-into-summer-of-code-programs/
 
@@ -399,19 +430,17 @@ Sarah Sharp
 
 # TODO:
 # 1. Remove the generic description when we have a good resume match; it's more personal.
-# 2. Reflow all text to 72 character width (sometimes 80-char wide gets wrapped).
-# 3. Dec to March, needs fixed to May to August and December to March.
-# 4. Doodle URL on newline.
 
-def writeStrongInvitation(emaildir, resume, boothlist):
-    matches = sorted(resume.strongProjectMatches, key=lambda match: len(match[1]))
+LINEWRAP = 72
+
+def writeInitialInvitation(emaildir, resume, boothlist, matches):
     project, keywords = matches[0]
     para = ('Based on your resume, it looks like you might be a good fit for in an internship with ' +
                       project.name)
     if project.short:
         para = para +' (' + project.short + ')'
     if not project.description:
-        return textwrap.fill(para + '.', 80) + '\n\n'
+        return textwrap.fill(para + '.', LINEWRAP, replace_whitespace=False) + '\n\n'
 
     para = para + ' which is offering an internship to ' + project.description
     keywords = [k for k in keywords if k.lower() not in project.printskip]
@@ -424,6 +453,12 @@ def writeStrongInvitation(emaildir, resume, boothlist):
             para = para + ' and '.join(k)
         else:
             para = para + ', '.join(k[:-1]) + ' and ' + k[-1]
+    return para
+
+def writeStrongInvitation(emaildir, resume, boothlist):
+    matches = sorted(resume.strongProjectMatches, key=lambda match: len(match[1]))
+    project, keywords = matches[0]
+    para = writeInitialInvitation(emaildir, resume, boothlist, matches)
 
     if len(resume.strongProjectMatches) > 1:
         para = (para + '. You may also be interested in the ' +
@@ -437,17 +472,56 @@ def writeStrongInvitation(emaildir, resume, boothlist):
             para = para + project.description + ' or the internship to '
         para = para + matches[-1][0].description
 
-    return textwrap.fill(para + '.', 80) + '\n\n'
+    return textwrap.fill(para + '.', LINEWRAP) + '\n\n'
 
-def craftEmail(emaildir, resume, boothlist):
+def writeMultipleStrongInvitation(emaildir, resume, boothlist):
+    matches = sorted(resume.strongProjectMatches, key=lambda match: len(match[1]))
+    project, keywords = matches[0]
+    para = writeInitialInvitation(emaildir, resume, boothlist, matches)
+
+    doneProjects = set()
+    for project, keywords in matches[1:]:
+        projmatches = [(p, k) for p, k in matches[1:]
+                       if p not in doneProjects and
+                       p.name == project.name
+                      ]
+        if not projmatches:
+            continue
+        doneProjects.add(project)
+        for p, k in projmatches:
+            para = (para + '. You may also be interested in the ' +
+                              p.name + ' internship')
+            if not p.description:
+                break
+            if len(projmatches) > 2:
+                para = para + 's to '
+            else:
+                para = para + ' to '
+            descriptions = []
+            for p2, k2 in projmatches[1:-1]:
+                para = para + p2.description + ' or the internship to '
+            para = para + projmatches[-1][0].description
+    return textwrap.fill(para + '.', LINEWRAP) + '\n\n'
+
+class emailType(Enum):
+    strong = 1
+    mixed = 2
+    weak = 3
+
+def craftEmail(emaildir, resume, boothlist, strength):
     email = header1 + 'To: ' + ', '.join(resume.emails) + '\n' + header3
     if resume.pdfFileName in boothlist:
         email = email + atBooth
     else:
         email = email + noBooth
-    email = (email + generalInfo +
-             writeStrongInvitation(emaildir, resume, boothlist) +
-             moreInfo)
+    if strength is emailType.strong:
+        email = (email + generalInfo +
+                 writeStrongInvitation(emaildir, resume, boothlist) +
+                 moreInfo)
+    elif strength is emailType.mixed:
+        email = (email + generalInfo +
+                 writeMultipleStrongInvitation(emaildir, resume, boothlist) +
+                 moreInfo)
     if len([address for address in resume.emails if address.endswith('tamu.edu')]) or re.search('Texas A&M', resume.contents):
         email = email + meetingInfo
         ext = '-email-tam.txt'
@@ -495,7 +569,7 @@ def createFormEmails(directory, resumeFiles, boothlist):
             except:
                 print('Could not find pdf file for', resume.textFileName)
                 continue
-            craftEmail(dirpath, resume, boothlist)
+            craftEmail(dirpath, resume, boothlist, emailType.strong)
 
     # For all resumes with strong matches with multiple orgs (but less than 4 orgs):
     # Create a directory called strong-mixed.
@@ -507,6 +581,19 @@ def createFormEmails(directory, resumeFiles, boothlist):
     #
     # Additionally, you might be interested in $PROJECT that involves $KEYWORDS which 
     # is offering an internship for $DESCRIPTION."
+    mixed = [resume for resume in resumeFiles if resume not in oneStrong and resume.strongProjectMatches]
+    dirpath = os.path.join(directory, 'mixed')
+    if not os.path.exists(dirpath):
+        os.makedirs(dirpath)
+    for resume in mixed:
+        try:
+            if not os.path.exists(os.path.join(dirpath, resume.pdfFileName)):
+                copyfile(os.path.join(directory, resume.pdfFileName),
+                         os.path.join(dirpath, resume.pdfFileName))
+        except:
+            print('Could not find pdf file for', resume.textFileName)
+            continue
+        craftEmail(dirpath, resume, boothlist, emailType.mixed)
 
     # For all resumes with strong matches with 4 or more orgs:
     # Create a directory called strong-scattered.
@@ -530,9 +617,18 @@ def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
     parser.add_argument('dir', help='Directory with .txt resume files')
     parser.add_argument('--csv', help='CSV file with name <email>,matching resume file of people who stopped by the booth')
+    parser.add_argument('--done', help='Directory with .txt resume files that have been contacted')
     #parser.add_argument('matches', help='file to write potential matches to')
     args = parser.parse_args()
     resumeFiles = readResumeFiles(args.dir)
+    if args.done:
+        doneResumes = readResumeFiles(args.done)
+        emails = [resume.emails[0] for resume in doneResumes if resume.emails]
+        for email in emails:
+            pdfs = [resume.pdfFileName for resume in resumeFiles if resume.emails and resume.emails[0] == email]
+            matches = [resume.pdfFileName for resume in doneResumes if resume.emails and resume.emails[0] == email]
+            if pdfs:
+                print('Already contacted:', email, ' '.join(pdfs), 'matches done resume', ' '.join(matches))
     #searchForEmail(args.csv, resumeFiles)
     boothlist = []
     if args.csv:
