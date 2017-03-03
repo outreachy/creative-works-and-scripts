@@ -83,6 +83,7 @@ def readResumeFiles(directory):
 def searchForEmail(csvFile, resumeFiles):
     with open(csvFile, 'r') as csvFile:
         freader = csv.DictReader(csvFile, delimiter=',', quotechar='"')
+        boothstops = []
         for row in freader:
             # Create a list of potential matches for the email we have.
             # Search through the list of emails in each PDF.
@@ -92,12 +93,11 @@ def searchForEmail(csvFile, resumeFiles):
             m = [r for r in resumeFiles if row['Email'] in r.emails]
             if len(m) == 0:
                 continue
-            files = ''
+            files = set()
             for resume in m:
-                files = files + ' ' + resume.pdfFileName
-                for email in resume.emails:
-                    files = files + ' <' + email +'>'
-            print(row['Name'] + ' <' + row['Email'] + '> matches', files, 'with',)
+                files.add(resume.pdfFileName)
+            boothstops.append((row['Email'], list(files)))
+    return boothstops
 
 projectsMay2017 = [
     #outreachyProject('Outreachy',
@@ -174,7 +174,8 @@ projectsMay2017 = [
                      ['linux', 'operating systems', 'networking'], ['linux', 'operating systems', 'networking']),
     outreachyProject('Linux kernel', None,
                      'write a driver for a sensor using the Industrial I/O interface',
-                     ['linux', 'operating systems', 'embedded'], ['linux', 'operating systems', 'embedded']),
+                     ['linux', 'operating systems|robotics|embedded', 'C\+\+|C(?!\+\+)'],
+                     ['linux', 'operating systems', 'robotics', 'embedded', 'c++']),
     outreachyProject('Linux kernel', None,
                      'improve documentation build system and translate docs into ReStructured Text format',
                      ['perl', 'python', 'operating systems'], ['operating systems']),
@@ -346,10 +347,9 @@ Subject: Internship opportunities in open source
 noBooth = '''Greetings!
 
 I'm Sarah Sharp, and we both attended the Tapia conference last
-September. I'm a coordinator for Outreachy, an internship program for
-people traditionally underrepresented in tech. We offer remote,
-three-month internships with a $5,500 stipend and a $500 conference
-travel stipend.
+September. I'd like to invite you to apply to two programs programs
+that provide paid internships in open source. Interns will work
+remotely with experienced mentors.
 
 '''
 
@@ -358,84 +358,57 @@ travel stipend.
 # What about the students at universities hosting introductory sessions?
 atBooth = '''Greetings!
 
-I'm Sarah Sharp, and we met when you stopped by the Outreachy booth at
-the Tapia conference last September. I'm a coordinator for Outreachy, an
-internship program for people traditionally underrepresented in tech. We
-offer remote, three-month internships with a $5,500 stipend and a $500
-conference travel stipend.
+I'm Sarah Sharp, and we met when you stopped by the Outreachy booth
+at the Tapia conference last September. I'd like to invite you to
+apply to two programs programs that provide paid internships.
+Interns will work remotely with experienced mentors.
 
 '''
 
-generalInfo = '''https://wiki.gnome.org/Outreachy
+generalInfo = '''Google Summer of Code is open to all university students:
 
-Interns work remotely with experienced mentors in free and open source
-software projects.  The internships are often focused on programming
-tasks, but some projects offer internships in user experience design,
-graphic design, documentation, web development, marketing, translation,
-and more.
+https://developers.google.com/open-source/gsoc/
+
+Outreachy is open internationally to women (both cis & trans),
+trans men, and genderqueer folks. It is also open to U.S. residents
+and nationals of any gender who are Black/African American,
+Hispanic/Latin@, American Indian, Alaska Native, Native Hawaiian, or
+Pacific Islander.
+
+https://wiki.gnome.org/Outreachy/
+
+Both programs offer internships from May 30 to August 30.
+
+Google Summer of Code application process runs from Feb 28 to Apr 3,
+while Outreachy's application process runs from Feb 16 to Mar 30.
+Google Summer of Code application only requires a project proposal.
+Outreachy also requires applicants to make project contributions.
 
 '''
 
-moreInfo = '''Our full list of internship projects (which will soon list Mozilla) is
-available at:
+moreInfo = '''The full list of Outreachy internship projects is available at:
 
 https://wiki.gnome.org/Outreachy/2017/MayAugust
 
-The Outreachy internships run from May 30 to August 30.  More details
-and eligibility criteria can be found here:
-
-https://wiki.gnome.org/Outreachy#Program_Details
-
-During the application period (February 16 to March 30), potential
-interns are expected to make contact with one or more of the open source
-project mentors, and make a contribution to the project. We find the
-strongest applicants contact mentors early, ask a lot of questions, and
-continually submit small contributions throughout the application
-period.
-
-Outreachy offers internships twice a year (May - August and
-December - March).  If you're unavailable for the summer internship,
-you can sign up for our mailing list to receive a notification when
-the next round opens:
-
-https://lists.sfconservancy.org/mailman/listinfo/outreachy-announce
-
-Please let me know if you have any questions about the program. The
-Outreachy coordinators (Marina, Karen, Sarah, Cindy, and Tony) can all
-be reached at outreachy-admins@gnome.org You can contact all
+Please let me know if you have any questions about the Outreachy
+program. Outreachy coordinators (Marina, Karen, Cindy, Tony, and I)
+can all be reached at outreachy-admins@gnome.org You can contact all
 organization mentors by emailing outreachy-list@gnome.org
 
-'''
+I hope you'll apply!
 
-noMeetingInfo = '''We're happy to have a virtual meeting at your college to introduce
-Outreachy.  You can see my availability and schedule at
-
-http://doodle.com/sarahsharp
-
-'''
-
-# emails ending with tamu.edu or containing the words 'Texas A&M'
-meetingInfo = '''Outreachy will be hosting a virtual introductory session at Texas A&M on
-March 1, 7-8:30pm. Contact Dario Sanchez for details.
-
-'''
-
-pleaseApply = '''I hope you'll apply! If you feel uncertain about applying, please read
-these words of advice from a former Outreachy intern:
-
-http://exploreshaifali.github.io/2015/06/08/getting-into-summer-of-code-programs/
-
+Thanks,
 Sarah Sharp
 '''
 
 # TODO:
 # 1. Remove the generic description when we have a good resume match; it's more personal.
 
-LINEWRAP = 72
+LINEWRAP = 68
 
 def writeInitialInvitation(emaildir, resume, boothlist, matches):
     project, keywords = matches[0]
-    para = ('Based on your resume, it looks like you might be a good fit for in an internship with ' +
+    para = ("Based on your resume, if you're eligible for Outreachy, it looks like you might be a good fit for in an internship with " +
                       project.name)
     if project.short:
         para = para +' (' + project.short + ')'
@@ -522,13 +495,7 @@ def craftEmail(emaildir, resume, boothlist, strength):
         email = (email + generalInfo +
                  writeMultipleStrongInvitation(emaildir, resume, boothlist) +
                  moreInfo)
-    if len([address for address in resume.emails if address.endswith('tamu.edu')]) or re.search('Texas A&M', resume.contents):
-        email = email + meetingInfo
-        ext = '-email-tam.txt'
-    else:
-        email = email + noMeetingInfo
-        ext = '-email.txt'
-    email = email + pleaseApply
+    ext = '-email.txt'
 
     with open(os.path.join(emaildir, os.path.splitext(resume.textFileName)[0] + ext), 'w') as f:
         f.write(email)
@@ -617,10 +584,14 @@ def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
     parser.add_argument('dir', help='Directory with .txt resume files')
     parser.add_argument('--csv', help='CSV file with name <email>,matching resume file of people who stopped by the booth')
+    parser.add_argument('--notus', help='Directory with .txt resumes files that may be non-U.S. residents')
     parser.add_argument('--done', help='Directory with .txt resume files that have been contacted')
     #parser.add_argument('matches', help='file to write potential matches to')
     args = parser.parse_args()
     resumeFiles = readResumeFiles(args.dir)
+
+    # Check to see if we have resumes to process that we've already
+    # send email to.
     if args.done:
         doneResumes = readResumeFiles(args.done)
         emails = [resume.emails[0] for resume in doneResumes if resume.emails]
@@ -629,18 +600,30 @@ def main():
             matches = [resume.pdfFileName for resume in doneResumes if resume.emails and resume.emails[0] == email]
             if pdfs:
                 print('Already contacted:', email, ' '.join(pdfs), 'matches done resume', ' '.join(matches))
-    #searchForEmail(args.csv, resumeFiles)
-    boothlist = []
-    if args.csv:
-        with open(args.csv, 'r') as f:
-            contents = f.read()
-            boothlist = [line.split(',')[1] for line in contents.splitlines() if len(line.split(',')) > 1]
+    if args.notus:
+        notusResumes = readResumeFiles(args.notus)
+
+    boothstops = (searchForEmail(args.csv, resumeFiles) +
+                  searchForEmail(args.csv, doneResumes) +
+                  searchForEmail(args.csv, notusResumes))
+    boothlist = set()
+    for email, filelist in boothstops:
+        boothlist.update(filelist)
+    print('Booth stop list', boothstops)
+    print('Booth stop pdfs', boothlist)
+    print('Done resumes', [resume.pdfFileName for resume in doneResumes])
+
     matchWithProjects(resumeFiles)
-    print(boothlist)
-    print('People who stopped by the booth with matches:',
-          len([resume for resume in resumeFiles
+    boothandresume = len([resume for resume in resumeFiles
                if resume.pdfFileName in boothlist
-               and len(resume.strongProjectMatches)]))
+               and len(resume.strongProjectMatches)])
+    print('People who stopped by the booth who have a resume and need an email:', boothandresume)
+    print('People who stopped by the booth who have a resume and have been sent email:',
+          len([resume for resume in doneResumes
+               if resume.pdfFileName in boothlist]))
+    print('People who stopped by the booth who have a resume and may be non-U.S. citizens:',
+          len([resume for resume in notusResumes
+               if resume.pdfFileName in boothlist]))
     createFormEmails(args.dir, resumeFiles, boothlist)
 
 if __name__ == "__main__":
