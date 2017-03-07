@@ -340,7 +340,7 @@ def matchWithProjects(resumeFiles):
 header1 = '''From: Sarah Sharp <saharabeara@gmail.com>
 '''
 header3 = '''Reply-to: outreachy-admins@gnome.org
-Subject: Internship opportunities in open source
+Subject: Internship opportunities
 
 '''
 
@@ -580,12 +580,26 @@ def createFormEmails(directory, resumeFiles, boothlist):
     # "Based on your resume, it looks like you might be interested in Outreachy
     # projects involving $KEYWORD like $MATCHES"
 
+def craftGenericEmail(emaildir, resume):
+    if not resume.emails:
+        address = ''
+    else:
+        address = resume.emails[0]
+    email = header1 + 'To: ' + address + '\n' + header3
+    email = email + noBooth
+    email = (email + generalInfo + moreInfo)
+    ext = '-email.txt'
+
+    with open(os.path.join(emaildir, os.path.splitext(resume.textFileName)[0] + ext), 'w') as f:
+        f.write(email)
+
 def main():
     parser = argparse.ArgumentParser(description='Search text resume files for skillset matches.')
     parser.add_argument('dir', help='Directory with .txt resume files')
     parser.add_argument('--csv', help='CSV file with name <email>,matching resume file of people who stopped by the booth')
     parser.add_argument('--notus', help='Directory with .txt resumes files that may be non-U.S. residents')
     parser.add_argument('--done', help='Directory with .txt resume files that have been contacted')
+    parser.add_argument('--generic', help='Simply create generic emails and ignore project matches', default=False)
     #parser.add_argument('matches', help='file to write potential matches to')
     args = parser.parse_args()
     resumeFiles = readResumeFiles(args.dir)
@@ -602,6 +616,14 @@ def main():
                 print('Already contacted:', email, ' '.join(pdfs), 'matches done resume', ' '.join(matches))
     if args.notus:
         notusResumes = readResumeFiles(args.notus)
+
+    if args.generic:
+        genericdir = os.path.join(args.dir, 'generic-todo')
+        if not os.path.exists(genericdir):
+            os.makedirs(genericdir)
+        for resume in resumeFiles:
+            craftGenericEmail(genericdir, resume)
+        return
 
     boothstops = (searchForEmail(args.csv, resumeFiles) +
                   searchForEmail(args.csv, doneResumes) +
@@ -624,7 +646,7 @@ def main():
     print('People who stopped by the booth who have a resume and may be non-U.S. citizens:',
           len([resume for resume in notusResumes
                if resume.pdfFileName in boothlist]))
-    createFormEmails(args.dir, resumeFiles, boothlist)
+    createFormEmails(args.dir, resumeFiles, boothlist, generic)
 
 if __name__ == "__main__":
     main()
