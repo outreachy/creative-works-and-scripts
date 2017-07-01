@@ -46,6 +46,7 @@
 import argparse
 import os
 import re
+import collections
 from shutil import copyfile
 
 def main():
@@ -77,14 +78,60 @@ def main():
             with open(currevfile, 'r') as crf:
                 isapage.append(os.path.join(fdir, "revisions", crf.readline().strip('\n')))
         print('Number of pages with a current revision', len(isapage))
-        for f in isapage[0:5]:
-            print(f)
         print('\nNumber of attachments', len(attachments))
-        for f in attachments[0:5]:
-            print(f)
         print('\nNumber of directories without attachments or a current revision', len(notapage))
-        for f in notapage[0:5]:
-            print(f)
+
+        # create a list of path directories by splitting the flat directory name on (2f)
+        # remove the last three elements from that path (PAGENAME/revisions/CURREV)
+        # create a new directory path from that list, 
+        # use os.mkdirs(path) to create all directories for that file (in a try-catch block)
+        for currevfile in isapage:
+            # PAGENAME/revisions/CURREV
+            basedir = os.path.split(os.path.dirname(os.path.dirname(currevfile)))[1]
+            paths = basedir.split('(2f)')
+            moin = paths[-1] + '.moin'
+            paths = paths[:-1]
+            paths.append(moin)
+            if len(paths) > 1:
+                basedir = os.path.join(args.websitedir, *(paths[:-1]))
+                try:
+                    os.makedirs(basedir)
+                except:
+                    pass
+            else:
+                basedir = args.websitedir
+            try:
+                copyfile(currevfile, os.path.join(basedir, moin))
+            except:
+                print('Missing revision!', currevfile)
+
+        # Copy all attachments into one folder,
+        # creating a list of where they were linked from
+        adir = os.path.join(args.websitedir, 'attachments')
+        try:
+            os.mkdir(adir)
+        except:
+            pass
+        attachmentnames = []
+        with open(os.path.join(adir, 'attachment-link-map.txt'), 'w') as linkmap:
+            for afile in attachments:
+                # PAGENAME/attachments/a
+                basedir = os.path.split(os.path.dirname(os.path.dirname(afile)))[1]
+                paths = basedir.split('(2f)')
+                aname = os.path.split(afile)[1]
+                attachmentnames.append(aname)
+                linkmap.write(aname + '\t' + os.path.join(*paths, aname) + '\n')
+                try:
+                    copyfile(afile, os.path.join(adir, aname))
+                except:
+                    print('Missing attachment!', afile)
+        # If there is already a file with the same name, warn for now and don't overwrite.
+        # In the future, we should choose a unique new name.
+        # But I don't care, because my three duplicate files are all copies of each other.
+        duplicates = [item for item, count in collections.Counter(attachmentnames).items() if count > 1]
+        if duplicates:
+            print('Warning, attachments with duplicate names!')
+            print(duplicates)
 
 if __name__ == "__main__":
     main()
