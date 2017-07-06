@@ -1,0 +1,29 @@
+# Released under CC0 by Jamey Sharp <jamey@minilop.net>
+#
+# The person who associated a work with this deed has dedicated the work to the
+# public domain by waiving all of his or her rights to the work worldwide under
+# copyright law, including all related and neighboring rights, to the extent
+# allowed by law.
+#
+# You can copy, modify, distribute and perform the work, even for commercial
+# purposes, all without asking permission. See Other Information below.
+#
+# A copy of the CC0 legalcode can be found at
+# http://creativecommons.org/publicdomain/zero/1.0/
+
+Get an initial configuration from wherever you installed MoinMoin:
+
+    cp -a $MOIN_PREFIX/share/moin/{config/wikiconfig.py,data,underlay} .
+
+Extract the exported tarball into `data/pages/`.
+
+Use MoinMoin to export a pile of HTML:
+
+    moin --config-dir=. export dump --target-dir=html
+
+Convert the HTML to Markdown, but clean up some weird MoinMoin-specific
+things first. If you want a different format than Markdown, replace the
+".md" extension with an appropriate one from the list supported by
+Pandoc.
+
+    for f in html/*.html; do pandoc --filter ./extract-contents.py -o "$(basename "$f" .html)".md "$f"; done
