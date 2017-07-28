@@ -25,6 +25,7 @@ import re
 
 def main():
     parser = argparse.ArgumentParser(description='Fix flat links to directory structures in moinmoin to markdown converted files.')
+    parser.add_argument('base', help='base directory for relative links')
     parser.add_argument('file', type=argparse.FileType('r+'), nargs='+', help='one or more files to convert')
     args = parser.parse_args()
     for f in args.file:
@@ -35,6 +36,21 @@ def main():
         # FYI - this regex also handles anchors in relative links
         contents = re.sub(r'\(\.\/Outreach(.*)\.html([\)#])', r'(./Outreach\1.md\2', contents)
         # Fix all links to Outreachy.md => index.md (or relative, depending on the page)
+        contents = re.sub(r'\(\.\/Outreachy\.md', r'(./index.md', contents)
+
+        # Outreachy links need to be relative to the directory the .md page is in.
+        # This script finds all .md files in a directory,
+        # computes the path back to the base directory relative to this one,
+        # and replaces all directory prefixes with that path.
+        # e.g.
+        # if base directory is . and we're in directory Outreachy,
+        # and the link is currently (./Outreachy/History.md),
+        # it will get changed to (./History.md)
+        fpath = os.path.realpath(f.name)
+        relpath = '(' + os.path.relpath(args.base, os.path.dirname(fpath)) + os.path.sep + r'Outreach\1.md\2'
+        contents = re.sub(r'\(\.\/Outreach(.*)\.md([\)#])', relpath, contents)
+        relindexpath = '(' + os.path.relpath(args.base, os.path.dirname(fpath)) + os.path.sep + r'index.md\1'
+        contents = re.sub(r'\(\.\/index.md([\)#])', relindexpath, contents)
         f.seek(0)
         f.write(contents)
         f.truncate()
