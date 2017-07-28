@@ -51,6 +51,10 @@ def main():
         contents = re.sub(r'\(\.\/Outreach(.*)\.md([\)#])', relpath, contents)
         relindexpath = '(' + os.path.relpath(args.base, os.path.dirname(fpath)) + os.path.sep + r'index.md\1'
         contents = re.sub(r'\(\.\/index.md([\)#])', relindexpath, contents)
+        relattpath = '(' + os.path.relpath(args.base, os.path.dirname(fpath)) + os.path.sep + r'attachments\1'
+        contents = re.sub(r'\(attachments.*(\/.*) ', relattpath, contents)
+        contents = re.sub(r'\{\.attachment.*?\}', '', contents, flags=re.MULTILINE|re.DOTALL)
+        contents = re.sub(r'[ "]+\{\{attachment.*?\}\}[ "]+', '', contents, flags=re.MULTILINE|re.DOTALL)
         f.seek(0)
         f.write(contents)
         f.truncate()
