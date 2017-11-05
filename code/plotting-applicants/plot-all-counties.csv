@@ -1,0 +1,223 @@
+Number of Applicants,Country,Code
+0,Afghanistan,AFG
+0,Albania,ALB
+0,Algeria,DZA
+0,American Samoa,ASM
+0,Andorra,AND
+0,Angola,AGO
+0,Anguilla,AIA
+0,Antigua and Barbuda,ATG
+0,Argentina,ARG
+0,Armenia,ARM
+0,Aruba,ABW
+0,Australia,AUS
+0,Austria,AUT
+0,Azerbaijan,AZE
+0,"Bahamas, The",BHM
+0,Bahrain,BHR
+0,Bangladesh,BGD
+0,Barbados,BRB
+0,Belarus,BLR
+0,Belgium,BEL
+0,Belize,BLZ
+0,Benin,BEN
+0,Bermuda,BMU
+0,Bhutan,BTN
+0,Bolivia,BOL
+0,Bosnia and Herzegovina,BIH
+0,Botswana,BWA
+0,Brazil,BRA
+0,British Virgin Islands,VGB
+0,Brunei,BRN
+0,Bulgaria,BGR
+0,Burkina Faso,BFA
+0,Burma,MMR
+0,Burundi,BDI
+0,Cabo Verde,CPV
+0,Cambodia,KHM
+0,Cameroon,CMR
+0,Canada,CAN
+0,Cayman Islands,CYM
+0,Central African Republic,CAF
+0,Chad,TCD
+0,Chile,CHL
+0,China,CHN
+0,Colombia,COL
+0,Comoros,COM
+0,"Congo, Democratic Republic of the",COD
+0,"Congo, Republic of the",COG
+0,Cook Islands,COK
+0,Costa Rica,CRI
+0,Cote d'Ivoire,CIV
+0,Croatia,HRV
+0,Cuba,CUB
+0,Curacao,CUW
+0,Cyprus,CYP
+0,Czech Republic,CZE
+0,Denmark,DNK
+0,Djibouti,DJI
+0,Dominica,DMA
+0,Dominican Republic,DOM
+0,Ecuador,ECU
+0,Egypt,EGY
+0,El Salvador,SLV
+0,Equatorial Guinea,GNQ
+0,Eritrea,ERI
+0,Estonia,EST
+0,Ethiopia,ETH
+0,Falkland Islands (Islas Malvinas),FLK
+0,Faroe Islands,FRO
+0,Fiji,FJI
+0,Finland,FIN
+0,France,FRA
+0,French Polynesia,PYF
+0,Gabon,GAB
+0,"Gambia, The",GMB
+0,Georgia,GEO
+0,Germany,DEU
+0,Ghana,GHA
+0,Gibraltar,GIB
+0,Greece,GRC
+0,Greenland,GRL
+0,Grenada,GRD
+0,Guam,GUM
+0,Guatemala,GTM
+0,Guernsey,GGY
+0,Guinea-Bissau,GNB
+0,Guinea,GIN
+0,Guyana,GUY
+0,Haiti,HTI
+0,Honduras,HND
+0,Hong Kong,HKG
+0,Hungary,HUN
+0,Iceland,ISL
+0,India,IND
+0,Indonesia,IDN
+0,Iran,IRN
+0,Iraq,IRQ
+0,Ireland,IRL
+0,Isle of Man,IMN
+0,Israel,ISR
+0,Italy,ITA
+0,Jamaica,JAM
+0,Japan,JPN
+0,Jersey,JEY
+0,Jordan,JOR
+0,Kazakhstan,KAZ
+0,Kenya,KEN
+0,Kiribati,KIR
+0,"Korea, North",PRK
+0,"Korea, South",KOR
+0,Kosovo,KSV
+0,Kuwait,KWT
+0,Kyrgyzstan,KGZ
+0,Laos,LAO
+0,Latvia,LVA
+0,Lebanon,LBN
+0,Lesotho,LSO
+0,Liberia,LBR
+0,Libya,LBY
+0,Liechtenstein,LIE
+0,Lithuania,LTU
+0,Luxembourg,LUX
+0,Macau,MAC
+0,Macedonia,MKD
+0,Madagascar,MDG
+0,Malawi,MWI
+0,Malaysia,MYS
+0,Maldives,MDV
+0,Mali,MLI
+0,Malta,MLT
+0,Marshall Islands,MHL
+0,Mauritania,MRT
+0,Mauritius,MUS
+0,Mexico,MEX
+0,"Micronesia, Federated States of",FSM
+0,Moldova,MDA
+0,Monaco,MCO
+0,Mongolia,MNG
+0,Montenegro,MNE
+0,Morocco,MAR
+0,Mozambique,MOZ
+0,Namibia,NAM
+0,Nepal,NPL
+0,Netherlands,NLD
+0,New Caledonia,NCL
+0,New Zealand,NZL
+0,Nicaragua,NIC
+0,Nigeria,NGA
+0,Niger,NER
+0,Niue,NIU
+0,Northern Mariana Islands,MNP
+0,Norway,NOR
+0,Oman,OMN
+0,Pakistan,PAK
+0,Palau,PLW
+0,Panama,PAN
+0,Papua New Guinea,PNG
+0,Paraguay,PRY
+0,Peru,PER
+0,Philippines,PHL
+0,Poland,POL
+0,Portugal,PRT
+0,Puerto Rico,PRI
+0,Qatar,QAT
+0,Romania,ROU
+0,Russia,RUS
+0,Rwanda,RWA
+0,Saint Kitts and Nevis,KNA
+0,Saint Lucia,LCA
+0,Saint Martin,MAF
+0,Saint Pierre and Miquelon,SPM
+0,Saint Vincent and the Grenadines,VCT
+0,Samoa,WSM
+0,San Marino,SMR
+0,Sao Tome and Principe,STP
+0,Saudi Arabia,SAU
+0,Senegal,SEN
+0,Serbia,SRB
+0,Seychelles,SYC
+0,Sierra Leone,SLE
+0,Singapore,SGP
+0,Sint Maarten,SXM
+0,Slovakia,SVK
+0,Slovenia,SVN
+0,Solomon Islands,SLB
+0,Somalia,SOM
+0,South Africa,ZAF
+0,South Sudan,SSD
+0,Spain,ESP
+0,Sri Lanka,LKA
+0,Sudan,SDN
+0,Suriname,SUR
+0,Swaziland,SWZ
+0,Sweden,SWE
+0,Switzerland,CHE
+0,Syria,SYR
+0,Taiwan,TWN
+0,Tajikistan,TJK
+0,Tanzania,TZA
+0,Thailand,THA
+0,Timor-Leste,TLS
+0,Togo,TGO
+0,Tonga,TON
+0,Trinidad and Tobago,TTO
+0,Tunisia,TUN
+0,Turkey,TUR
+0,Turkmenistan,TKM
+0,Tuvalu,TUV
+0,Uganda,UGA
+0,Ukraine,UKR
+0,United Arab Emirates,ARE
+0,United Kingdom,GBR
+0,United States,USA
+0,Uruguay,URY
+0,Uzbekistan,UZB
+0,Vanuatu,VUT
+0,Venezuela,VEN
+0,Vietnam,VNM
+0,Virgin Islands,VGB
+0,West Bank,WBG
+0,Yemen,YEM
+0,Zambia,ZMB
+0,Zimbabwe,ZWE
