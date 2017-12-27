@@ -15,6 +15,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import argparse
+from  email.message import EmailMessage
+from email.parser import Parser
+import email.policy
 import os
 import re
 import smtplib
@@ -22,9 +25,11 @@ import sys
 import csv
 
 from_address = 'organizers@outreachy.org'
-header1 = '''From: Outreachy Organizers <{from_address}>
-Bcc: {from_address}
-'''.format(from_address=from_address)
+
+standard_headers = {
+    'From': from_address,
+    'Bcc': from_address
+}
 
 signature = '''
 {organizer}
@@ -72,7 +77,7 @@ def main():
             'Mentor-intern pairs:\n' + \
             '  intern1 <email@example.com>, mentor2 <email@example.com>, mentor3 <email@example.com>' + \
             '  intern2 <email@example.com>, mentor4 <email@example.com>',
-            type=argparse.FileType('r')
+            type=argparse.FileType('r', encoding='UTF-8')
             )
     args = parser.parse_args()
 
@@ -144,37 +149,43 @@ def main():
     else:
          smtp = None
 
-    body = args.body.read()
+    template = Parser(policy=email.policy.EmailPolicy(linesep='\n', cte_type='8bit')).parse(args.body)
+    body = template.get_content()
+
     for pair in cohort_pairs:
         intern_name = pair.intern_contact.split('<', 1)[0].strip()
         filename = intern_name.replace(' ', '-') + '.txt'
         this_body = body.replace('$INTERN', intern_name)
+
         mailfile = os.path.join(args.outdir, filename)
 
-        to_lines = []
+        recipients = []
         if args.include_mentor:
-            to_lines.append(pair.mentor_contacts)
+            recipients += re.split('\s*,\s*', pair.mentor_contacts)
         if args.include_coordinator:
-            to_lines.append(pair.coordinator_contacts)
+            recipients += re.split('\s*,\s*', pair.coordinator_contacts)
         if args.include_intern:
-            to_lines.append(pair.intern_contact)
+            recipients += (pair.intern_contact,)
 
-        to_line = ',\n\t'.join(to_lines)
+        message = EmailMessage()
+        for k, v in standard_headers.items():
+            message[k] = v
+        for k, v in template.items():
+            message[k] = v
+        message['To'] = recipients
 
-        with open(mailfile, 'w') as outfile:
-            outfile.write(header1)
-            outfile.write('To: ' + to_line + '\n')
-            outfile.write(this_body)
-            outfile.write(signature.format(organizer=args.organizer))
+        message.set_content(this_body + signature.format(organizer=args.organizer))
+
+        with open(mailfile, 'wb') as outfile:
+            outfile.write(message.as_bytes())
 
         if smtp:
-            to_addresses = re.split(r'\s*,\s*', to_line)
-            to_addresses.append(from_address) # Bcc:
+            recipients.append(from_address) # Bcc:
 
-            with open(mailfile, 'r') as infile:
+            with open(mailfile, 'rb') as infile:
                 msg = infile.read()
 
-            smtp.sendmail(from_address, to_addresses, msg)
+            smtp.sendmail(from_address, recipients, msg)
 
 if __name__ == "__main__":
     main()
