@@ -22,8 +22,9 @@ import sys
 import csv
 
 from_address = 'organizers@outreachy.org'
-header1 = '''From: Outreachy Organizers <{}>
-'''.format(from_address)
+header1 = '''From: Outreachy Organizers <{from_address}>
+Bcc: {from_address}
+'''.format(from_address=from_address)
 
 signature = '''
 {organizer}
@@ -168,6 +169,7 @@ def main():
 
         if smtp:
             to_addresses = re.split(r'\s*,\s*', to_line)
+            to_addresses.append(from_address) # Bcc:
 
             with open(mailfile, 'r') as infile:
                 msg = infile.read()
