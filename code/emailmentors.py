@@ -57,6 +57,8 @@ def main():
                         default=False, action='store_true')
     parser.add_argument('--include-coordinator', help='Include coordinator on the email?',
                         default=False, action='store_true')
+    parser.add_argument('--include-mentor', help='Include mentor(s) on the email?',
+                        default=False, action='store_true')
     parser.add_argument('--include-intern', help='Include coordinator on the email?',
                         default=False, action='store_true')
     parser.add_argument('contacts',
@@ -72,6 +74,10 @@ def main():
             type=argparse.FileType('r')
             )
     args = parser.parse_args()
+
+    if not (args.include_mentor or args.include_intern or args.include_mentor):
+        print('One or more of --include-mentor, --include-intern, or --include-mentor\nmust be specified', file=sys.stderr)
+        sys.exit(1)
 
     if not os.path.exists(args.outdir):
         os.makedirs(args.outdir)
@@ -144,11 +150,15 @@ def main():
         this_body = body.replace('$INTERN', intern_name)
         mailfile = os.path.join(args.outdir, filename)
 
-        to_line = pair.mentor_contacts
+        to_lines = []
+        if args.include_mentor:
+            to_lines.append(pair.mentor_contacts)
         if args.include_coordinator:
-            to_line += ',\n\t' + pair.coordinator_contacts
+            to_lines.append(pair.coordinator_contacts)
         if args.include_intern:
-            to_line += ',\n\t' + pair.intern_contact
+            to_lines.append(pair.intern_contact)
+
+        to_line = ',\n\t'.join(to_lines)
 
         with open(mailfile, 'w') as outfile:
             outfile.write(header1)
