@@ -43,8 +43,10 @@ def main():
     parser = argparse.ArgumentParser(description='Generate several text-based emails to a mentor about their intern')
     parser.add_argument('outdir', help='Directory to create draft emails in')
     parser.add_argument('body', help='File containing the text-based body of the email', type=argparse.FileType('r'))
-    parser.add_argument('--coordinator', help='Include coordinator on the email?', type=bool, default=False)
-    parser.add_argument('--intern', help='Include coordinator on the email?', type=bool, default=False)
+    parser.add_argument('--include-coordinator', help='Include coordinator on the email?',
+                        default=False, action='store_true')
+    parser.add_argument('--include-intern', help='Include coordinator on the email?',
+                        default=False, action='store_true')
     parser.add_argument('contacts',
             help='File of the form:\n' + \
             '# COMMUNITY\n' + \
@@ -111,9 +113,9 @@ def main():
         with open(os.path.join(args.outdir, filename), 'w') as outfile:
             outfile.write(header1)
             outfile.write('To: ' + pair.mentor_contacts + '\n')
-            if args.coordinator:
+            if args.include_coordinator:
                 outfile.write('\t' + pair.coordinator_contacts + '\n')
-            if args.intern:
+            if args.include_intern:
                 outfile.write('\t' + pair.intern_contacts + '\n')
             outfile.write(this_body)
             outfile.write(signature)
