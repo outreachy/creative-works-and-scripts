@@ -22,11 +22,11 @@ import sys
 import csv
 
 from_address = 'organizers@outreachy.org'
-header1 = '''From: Outreachy Organizers <organizers@outreachy.org>
-'''
+header1 = '''From: Outreachy Organizers <{}>
+'''.format(from_address)
 
 signature = '''
-Sage Sharp
+{organizer}
 Outreachy organizer
 '''
 
@@ -47,6 +47,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate several text-based emails to a mentor about their intern')
     parser.add_argument('outdir', help='Directory to create draft emails in')
     parser.add_argument('body', help='File containing the text-based body of the email', type=argparse.FileType('r'))
+    parser.add_argument('--organizer', help='Organizer sending this email', required=True)
     parser.add_argument('--smtp-server', help='SMTP server to send mail via')
     parser.add_argument('--smtp-port', help='Port to use on SMTP server (default is 25 for non-ssl, 465 for SSL)', default=0, type=int)
     parser.add_argument('--smtp-ssl', help='Connect to the SMTP server via SSL',
@@ -153,7 +154,7 @@ def main():
             outfile.write(header1)
             outfile.write('To: ' + to_line + '\n')
             outfile.write(this_body)
-            outfile.write(signature)
+            outfile.write(signature.format(organizer=args.organizer))
 
         if smtp:
             to_addresses = re.split(r'\s*,\s*', to_line)
