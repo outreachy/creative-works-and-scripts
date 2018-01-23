@@ -115,6 +115,7 @@ def main():
                 outfile.write('\t' + pair.coordinator_contacts + '\n')
             if args.intern:
                 outfile.write('\t' + pair.intern_contacts + '\n')
+            outfile.write('Bcc: organizers@outreachy.org\n')
             outfile.write(this_body)
             outfile.write(signature)
 
