@@ -68,7 +68,7 @@ def main():
     cohort_pairs = []
     while True:
         line = args.contacts.readline()
-        community = line.split(' ')[1].strip()
+        community = line.lstrip('# ').strip()
         line = args.contacts.readline()
         line = args.contacts.readline()
         coordinators = line.strip()
@@ -107,12 +107,27 @@ def main():
     for pair in cohort_pairs:
         intern_name = pair.intern_contact.split('<', 1)[0].strip()
         filename = intern_name.replace(' ', '-') + '.txt'
+
+        coordinator_given_names = []
+        for c in pair.coordinator_contacts.split(','):
+            if c != '':
+                coordinator_given_names.append(c.split('<', 1)[0].strip().split(' ')[0])
+
         this_body = body.replace('$INTERN', intern_name)
+        this_body = this_body.replace('$COMMUNITY', pair.community)
+        this_body = this_body.replace('$COORDINATOR', ' and '.join(coordinator_given_names))
         with open(os.path.join(args.outdir, filename), 'w') as outfile:
             outfile.write(header1)
-            outfile.write('To: ' + pair.mentor_contacts + '\n')
+
+            if pair.mentor_contacts != '':
+                outfile.write('To: ' + pair.mentor_contacts + '\n')
+                if args.coordinator:
+                    outfile.write('\t')
+            else:
+                outfile.write('To: ')
             if args.coordinator:
-                outfile.write('\t' + pair.coordinator_contacts + '\n')
+                outfile.write(pair.coordinator_contacts + '\n')
+
             if args.intern:
                 outfile.write('\t' + pair.intern_contacts + '\n')
             outfile.write('Bcc: organizers@outreachy.org\n')
