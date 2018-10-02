@@ -1,0 +1,14 @@
+Greetings,
+
+Applications are now open for Outreachy, an internship program that supports diversity in free and open source software. Outreachy offers remote, three-month internships with a $5,500 stipend and a $500 travel stipend. Outreachy expressly invites women (both cis and trans), trans men, and genderqueer people to apply. We also expressly invite applications from residents and nationals of the United States of any gender who are Black/African American, Hispanic/Latin@, Native American/American Indian, Alaska Native, Native Hawaiian, or Pacific Islander. Anyone who faces systematic bias or discrimination in the technology industry of their country is invited to apply. https://www.outreachy.org/apply/
+
+Interns work remotely with experienced mentors in free and open source software projects. The internships are often focused on programming tasks, but some projects offer internships in user experience design, graphic design, documentation, web development, marketing, translation, and more.
+
+The Outreachy internships run from December 4, 2018 to March 4, 2019.  More details and eligibility criteria can be found here:
+https://www.outreachy.org/apply/eligibility/
+
+Applying to Outreachy is a little different than other internship programs. During the application period (September 19 to October 30), applicants are expected to make contact with one or more of the project mentors,  and make a contribution to the project. Outreachy organizers have found that the strongest applicants contact mentors early, ask a lot of questions, and continually submit small contributions throughout the application period.
+
+Please let us know if you have any questions about the program. The Outreachy organizers (Karen Sandler, Sage Sharp, Marina Zhurakhinskaya, Cindy Pallares, and Tony Sebro) can all be reached at through our contact form https://outreachy.org/contact
+
+We hope you'll help us spread the word about Outreachy internships!

@@ -1,0 +1,11 @@
+Sample tweet:
+
+Please RT: Outreachy internships are completely remote, paid ($5,500 stipend), and last three months. Outreachy supports diversity in free and open source software! Applications for the @outreachy December 2018 to March 2019 internships are now open: https://www.outreachy.org/apply/
+
+Follow up tweets:
+
+Outreachy expressly invites applicants from around the world who are women (both cis and trans), trans men, and genderqueer people. Apply for our internships, which are completely remote, paid ($5,500 stipend), and last three months. https://www.outreachy.org/apply/
+
+Outreachy also expressly invites applications from U.S. residents and nationals of any gender who are Black/African American, Hispanic/Latinx, Native American/American Indian, Alaska Native, Native Hawaiian, or Pacific Islander. https://www.outreachy.org/apply/
+
+Outreachy expressly invites applicants from around the world who face under-representation, systemic bias or discrimination in the technology industry of their country. Apply for our internships, which are completely remote, paid ($5,500 stipend), and last three months. https://www.outreachy.org/apply/
