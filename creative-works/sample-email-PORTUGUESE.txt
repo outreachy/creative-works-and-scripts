@@ -1,0 +1,13 @@
+Olá,
+Inscrições estão abertas agora para o Outreachy, um programa de estágio que apoia diversidade em software livre e de código aberto (open source). Outreachy oferece estágios remotos, com duração de três meses, com bolsa de $5,500 e um auxílio de $500 para viagem. Outreachy expressamente convida a se candidatarem pessoas que são mulheres (tanto cis quanto trans), homens trans, e pessoas genderqueer. Nós também convidamos expressamente pessoas residentes e nativas dos E.U.A. de qualquer gênero, que sejam Negras/Afro-americanas, Hispânicas/latinas, Nativo americanas/Índio americanas, nativo alasquianas, nativo havainas ou ilhéus do Pacífico. Qualquer pessoa que sofram de preconceito ou discriminação na área de tecnologia em seus países também é convidada a aplicar.
+
+Estagiários do Outreachy trabalham remotamente com mentores experientes em projetos de software livre e de código aberto. Os estágios são normalmente focados em atividades de programação, mas alguns projetos oferecem estágios em experiência do usuário, design gráfico, documentação, desenvolvimento web, marketing, tradução, entre outros.
+
+Os estágios do Outreachy acontecem de 4 de Dezembro de 2018 até dia 4 de Março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
+https://www.outreachy.org/apply/eligibility/
+
+Aplicar para o Outreachy é um pouco diferente do processo de outros programas de estágio. Durante o período de inscrição (de 19 de Setembro até 30 de Outubro), é esperado da pessoa candidata a entrar em contato com um ou mais mentores de projeto, e fazer uma contribuição para o projeto. Organizadores do Outreachy notaram que as pessoas canditadas mais preparadas são aquelas que entram em contato com o seu mentor antecipadamente, fazem várias perguntas, e enviam contribuições continuamente durante o período de inscrição.
+
+Por favor, entre em contato caso tenham perguntas sobre o programa. As pessoas organizadoras do Outreachy (Karen Sandler, Sage Sharp, Marina Zhurakhinskaya, Cindy Pallares e Tony Sebro) podem ser contatadas a partir do formulário de contato no https://outreachy.org/contact
+
+Esperamos que você nos ajude a compartilhar os estágios do Outreachy!
