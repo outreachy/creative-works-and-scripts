@@ -1,7 +1,7 @@
 Olá,
 As inscrições para o Outreachy, um programa de estágio que apoia a diversidade em projetos de software livre e código aberto, agora estão abertas. Outreachy oferece estágios remotos com duração de três meses, uma bolsa de U$5.500 e um auxílio-financeiro de U$500 para viagens, e expressamente convida a se candidatarem mulheres (tanto cis quanto trans), homens trans, e pessoas genderqueer. Nós também convidamos expressamente pessoas residentes e nativas dos E.U.A. de qualquer gênero, que sejam Negras/Afro-americanas, Hispânicas/latinas, Nativo americanas/Índio americanas, nativo alasquianas, nativo havainas ou ilhéus do Pacífico. Qualquer pessoa que sofram de preconceito ou discriminação na área de tecnologia em seus países também é convidada a se candidatar.
 
-Estagiários do Outreachy trabalham remotamente com mentores experientes em projetos de software livre e de código aberto. Os estágios são normalmente focados em atividades de programação, mas alguns projetos oferecem estágios em experiência do usuário, design gráfico, documentação, desenvolvimento web, marketing, tradução, entre outros.
+Estagiários do Outreachy trabalham remotamente com mentores experientes em projetos de software livre e de código aberto. Os estágios são normalmente focados em atividades de programação, mas alguns projetos oferecem estágios relacionados a experiência de usuário, design gráfico, documentação, desenvolvimento web, marketing, tradução, entre outros.
 
 Os estágios do Outreachy acontecem de 4 de Dezembro de 2018 até dia 4 de Março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
 https://www.outreachy.org/apply/eligibility/
