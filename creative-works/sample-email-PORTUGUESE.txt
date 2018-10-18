@@ -3,7 +3,7 @@ As inscrições para o Outreachy, um programa de estágio que apoia a diversidad
 
 Estagiários do Outreachy trabalham remotamente com mentores experientes em projetos de software livre e de código aberto. Os estágios são normalmente focados em atividades de programação, mas alguns projetos oferecem estágios relacionados a experiência de usuário, design gráfico, documentação, desenvolvimento web, marketing, tradução, entre outros.
 
-Os estágios do Outreachy acontecem de 4 de Dezembro de 2018 até dia 4 de Março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
+Os estágios do Outreachy acontecem de 4 de dezembro de 2018 a 4 de março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
 https://www.outreachy.org/apply/eligibility/
 
 Aplicar para o Outreachy é um pouco diferente do processo de outros programas de estágio. Durante o período de inscrição (de 19 de Setembro até 30 de Outubro), é esperado da pessoa candidata a entrar em contato com um ou mais mentores de projeto, e fazer uma contribuição para o projeto. Organizadores do Outreachy notaram que as pessoas canditadas mais preparadas são aquelas que entram em contato com o seu mentor antecipadamente, fazem várias perguntas, e enviam contribuições continuamente durante o período de inscrição.
