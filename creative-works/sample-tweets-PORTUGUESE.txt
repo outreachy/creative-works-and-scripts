@@ -1,7 +1,7 @@
 Tweet padrão:
 
 Por favor RT:
-Estágios do Outreachy são 100% remotos, com bolsa de $5,500, e duram três meses.
+Estágios do Outreachy são 100% remotos, com bolsa de U$5.500, e duram 3 meses.
 Outreachy apoia a diversidade em software livre e de código aberto. Inscrições para a rodada de Dezembro 2018 até Março 2019 do @outreachy estão abertas agora: https://www.outreachy.org/apply/
 
 Continuação do Tweet:
