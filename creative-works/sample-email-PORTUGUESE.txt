@@ -6,7 +6,7 @@ Estagiários do Outreachy trabalham remotamente com mentores experientes em proj
 Os estágios do Outreachy acontecem de 4 de dezembro de 2018 a 4 de março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
 https://www.outreachy.org/apply/eligibility/
 
-Aplicar para o Outreachy é um pouco diferente do processo de outros programas de estágio. Durante o período de inscrição (de 19 de Setembro até 30 de Outubro), é esperado da pessoa candidata a entrar em contato com um ou mais mentores de projeto, e fazer uma contribuição para o projeto. Organizadores do Outreachy notaram que as pessoas canditadas mais preparadas são aquelas que entram em contato com o seu mentor antecipadamente, fazem várias perguntas, e enviam contribuições continuamente durante o período de inscrição.
+Candidatar-se ao Outreachy é um pouco diferente do processo de outros programas de estágio. Durante o período de inscrição (de 19 de setembro a 30 de outubro), é esperado da pessoa candidata a entrar em contato com um ou mais mentores de projeto, e fazer uma contribuição. A organização do Outreachy notou que as pessoas canditadas mais fortes são aquelas que entram em contato com seus mentores antecipadamente, fazem várias perguntas, e enviam contribuições continuamente durante o período de inscrição.
 
 Por favor, entre em contato caso tenham perguntas sobre o programa. As pessoas organizadoras do Outreachy (Karen Sandler, Sage Sharp, Marina Zhurakhinskaya, Cindy Pallares e Tony Sebro) podem ser contatadas a partir do formulário de contato no https://outreachy.org/contact
 
