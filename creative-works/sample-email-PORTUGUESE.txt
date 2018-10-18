@@ -1,0 +1,13 @@
+Olá,
+As inscrições para o Outreachy, um programa de estágio que apoia a diversidade em projetos de software livre e código aberto, agora estão abertas. Outreachy oferece estágios remotos com duração de três meses, uma bolsa de U$5.500 e um auxílio-financeiro de U$500 para viagens, e expressamente convida a se candidatarem mulheres (tanto cis quanto trans), homens trans, e pessoas genderqueer. Nós também convidamos expressamente pessoas residentes e nativas dos E.U.A. de qualquer gênero, que sejam Negras/Afro-americanas, Hispânicas/latinas, Nativo americanas/Índio americanas, nativo alasquianas, nativo havainas ou ilhéus do Pacífico. Qualquer pessoa que sofram de preconceito ou discriminação na área de tecnologia em seus países também é convidada a se candidatar.
+
+Estagiários do Outreachy trabalham remotamente com mentores experientes em projetos de software livre e de código aberto. Os estágios são normalmente focados em atividades de programação, mas alguns projetos oferecem estágios relacionados a experiência de usuário, design gráfico, documentação, desenvolvimento web, marketing, tradução, entre outros.
+
+Os estágios do Outreachy acontecem de 4 de dezembro de 2018 a 4 de março de 2019. Mais detalhes e os critérios de elegibilidade podem ser acessados aqui:
+https://www.outreachy.org/apply/eligibility/
+
+Candidatar-se ao Outreachy é um pouco diferente do processo de outros programas de estágio. Durante o período de inscrição (de 19 de setembro a 30 de outubro), é esperado da pessoa candidata a entrar em contato com um ou mais mentores de projeto, e fazer uma contribuição. A organização do Outreachy notou que as pessoas canditadas mais fortes são aquelas que entram em contato com seus mentores antecipadamente, fazem várias perguntas, e enviam contribuições continuamente durante o período de inscrição.
+
+Por favor, entre em contato caso tenham dúvidas sobre o programa. As pessoas organizadoras do Outreachy (Karen Sandler, Sage Sharp, Marina Zhurakhinskaya, Cindy Pallares e Tony Sebro) podem ser contatadas a partir do formulário de contato no https://outreachy.org/contact
+
+Esperamos que você nos ajude a compartilhar os estágios do Outreachy!
