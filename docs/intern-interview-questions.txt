@@ -1,0 +1,35 @@
+# Newly Accepted Interns Questions
+
+1. Tell me about your experiences with free and open source software before the Outreachy application period.
+
+2. How did you hear about Outreachy?
+
+3. How did you react when you found out you were accepted as an Outreachy intern?
+
+4. How did you feel when you first thought about applying?
+   - What were you excited about?
+   - What were your concerns?
+
+5. What would you say to someone who was worried about applying for Outreachy?
+
+6. Tell me about your experience working with your community and mentors during the application period.
+
+7. What was one thing your mentors did that made you feel welcome?
+
+8. What is one thing you wish your mentors did during the application process?
+
+9. What is one thing the Outreachy website did to make you feel welcome?
+
+10. What is one thing that could be improved about the Outreachy website?
+
+# Past Intern Questions
+
+1. What new skills did you learn during your Outreachy internship?
+
+2. Did those skills help you later in your career?
+
+3. What communication skills did you learn during your Outreachy internship?
+
+4. Tell me how you felt about contributing to FOSS a) before your internship, b) after your internship, c) now.
+
+5. How has Outreachy impacted your life, career, or studies?
