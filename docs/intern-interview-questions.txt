@@ -12,17 +12,19 @@
 
 5. What would you say to someone who was worried about applying for Outreachy?
 
-6. Tell me about your experience working with your community and mentors during the application period.
+6. What advice would you give to future applicants?
 
-7. What was one thing your mentors did that made you feel welcome?
+7. Tell me about your experience working with your community and mentors during the application period.
 
-8. What is one thing you wish your mentors did during the application process? (This is private feedback and won't be shown in the edited videos)
+8. What was one thing your mentors did that made you feel welcome?
 
-9. What is one thing the Outreachy website did to make you feel welcome?
+9. What is one thing you wish your mentors did during the application process? (This is private feedback and won't be shown in the edited videos)
 
-10. What is one thing that could be improved about the Outreachy website? (This is private feedback and won't be shown in the edited videos)
+10. What is one thing the Outreachy website did to make you feel welcome?
 
-# Past Intern Questions
+11. What is one thing that could be improved about the Outreachy website? (This is private feedback and won't be shown in the edited videos)
+
+# Additional Questions for Past Intern Questions
 
 1. What new skills did you learn during your Outreachy internship?
 
