@@ -40,6 +40,19 @@ We really appreciate your help! See the email below for more details on the surv
 
 '''
 
+final_reminder_subject = '''Subject: Last chance for an Outreachy sticker!
+
+'''
+final_reminder_body = '''Please take 20 minutes to fill out the longitudinal survey for past PROGRAM interns. If you fill it out by EOD on DUEDATE, we'll send you an Outreachy sticker:
+
+URL
+
+We really appreciate your help! See the email below for more details on the survey.
+
+---
+
+'''
+
 body = '''Hi NAME,
 
 According to our records, you participated in the PROGRAM internships with COMMUNITY from START to END. Now we need your help!
@@ -109,7 +122,7 @@ def main():
     parser.add_argument('--stuffingdate', help='Date for volunteers to stuff survey reward envelopes', type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d-%H:%M'))
     parser.add_argument('--endstuffingdate', help='End time for party for volunteers to stuff survey reward envelopes', type=lambda s: datetime.datetime.strptime(s, '%Y-%m-%d-%H:%M'))
     parser.add_argument('--totalinterns', help='Manually set the total number of interns. Required for reminder emails. Set to 0 to use the number of recipients in the CSV file', type=int)
-    parser.add_argument('--reminder', help='Set to true if sending reminder emails', type=bool, default=False)
+    parser.add_argument('--reminder', help='Set to 0 if sending the first email, 1 for a mid-point reminder, and 2 for a final reminder', type=int, default=0)
     parser.add_argument('--surveyheader', help='CSV header for whether a participant responded to the survey')
     args = parser.parse_args()
 
@@ -137,9 +150,15 @@ def main():
         with open(os.path.join(args.outdir, str(index) + '.txt'), 'w') as email:
             email.write(header1)
             email.write('To: "' + row['Public Name'] + '" <' + row['Email'] + '>\n')
-            if args.reminder:
+            if args.reminder == 1:
                 email.write(reminder_subject)
                 this_reminder_body = reminder_body.replace('PROGRAM', row['Program Name'])
+                this_reminder_body = this_reminder_body.replace('URL', args.survey)
+                email.write(this_reminder_body)
+            elif args.reminder == 2:
+                email.write(final_reminder_subject)
+                this_reminder_body = final_reminder_body.replace('PROGRAM', row['Program Name'])
+                this_reminder_body = this_reminder_body.replace('DUEDATE', args.duedate.strftime('%B %d'))
                 this_reminder_body = this_reminder_body.replace('URL', args.survey)
                 email.write(this_reminder_body)
             else:
