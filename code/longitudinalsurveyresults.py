@@ -20,17 +20,10 @@
 import argparse
 import csv
 
-def main():
-    parser = argparse.ArgumentParser(description='Print statistics from 2019 Outreachy longitudinal survey')
-    parser.add_argument('--csv', help='CSV file of longitudinal survey responses')
-    args = parser.parse_args()
+def print_percentage(name, partial, total):
+    print('{}: {:.0f}% ({})'.format(name, float(partial / total * 100), partial))
 
-    data = []
-    with open(args.csv, 'r') as csvFile:
-        freader = csv.DictReader(csvFile, delimiter=';', quotechar='"')
-        for row in freader:
-            data.append(row)
-
+def race_and_ethnicity_demographics(data):
     # demographics:
     # 'What is your race and ethnicity? (Select all that apply)/Asian'
     total_alums = 0
@@ -56,12 +49,24 @@ def main():
             white_alums += 1
 
     print('Total alums: {}'.format(total_alums))
-    print('Asian: {:.0f}% ({})'.format(float(asian_alums / total_alums *100), asian_alums))
-    print('Black: {:.0f}% ({})'.format(float(black_alums / total_alums *100), black_alums))
-    print('Hispanic or Latinx: {:.0f}% ({})'.format(float(hispanic_or_latinx_alums / total_alums *100), hispanic_or_latinx_alums))
-    print('Indigenous: {:.0f}% ({})'.format(float(indigenous_alums / total_alums *100), indigenous_alums))
-    print('Middle Eastern: {:.0f}% ({})'.format(float(middle_eastern_alums / total_alums *100), middle_eastern_alums))
-    print('White: {:.0f}% ({})'.format(float(white_alums / total_alums *100), white_alums))
+    print_percentage('Asian', asian_alums, total_alums)
+    print_percentage('Black', black_alums, total_alums)
+    print_percentage('Hispanic or Latinx', hispanic_or_latinx_alums, total_alums)
+    print_percentage('Middle Eastern', middle_eastern_alums, total_alums)
+    print_percentage('White', white_alums, total_alums)
+
+def main():
+    parser = argparse.ArgumentParser(description='Print statistics from 2019 Outreachy longitudinal survey')
+    parser.add_argument('--csv', help='CSV file of longitudinal survey responses')
+    args = parser.parse_args()
+
+    data = []
+    with open(args.csv, 'r') as csvFile:
+        freader = csv.DictReader(csvFile, delimiter=';', quotechar='"')
+        for row in freader:
+            data.append(row)
+
+    race_and_ethnicity_demographics(data)
 
 if __name__ == "__main__":
     main()
