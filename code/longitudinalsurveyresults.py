@@ -165,6 +165,32 @@ def retention_statistics(data):
     print_percentage('Unemployed', unemployed_alums, total_alums)
     print_percentage('Parents', parent_alums, total_alums)
 
+def foss_retention(data):
+    total_alums = 0
+    use_foss = 0
+    contribute_to_foss = 0
+    do_not_contribute_to_foss = 0
+
+    print()
+    print("Retention in FOSS")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        total_alums += 1
+
+        if row['In the last year, have you used free software / open source?'] == 'Yes':
+            use_foss += 1
+
+        if row['In the last year, have you contributed to free software / open source with:'] == 'No, I have not contributed to free software / open source in the last year':
+            do_not_contribute_to_foss += 1
+        elif row['In the last year, have you contributed to free software / open source with:'] != '':
+            contribute_to_foss += 1
+
+    print('Total alums: {}'.format(total_alums))
+    print_percentage('Uses FOSS', use_foss, total_alums)
+    print_percentage('Contributes to FOSS', contribute_to_foss, total_alums)
+    print_percentage('Does not contribute to FOSS', do_not_contribute_to_foss, total_alums)
+
 def main():
     parser = argparse.ArgumentParser(description='Print statistics from 2019 Outreachy longitudinal survey')
     parser.add_argument('--csv', help='CSV file of longitudinal survey responses')
@@ -179,6 +205,7 @@ def main():
     race_and_ethnicity_demographics(data)
     before_outreachy_statistics(data)
     retention_statistics(data)
+    foss_retention(data)
 
 if __name__ == "__main__":
     main()
