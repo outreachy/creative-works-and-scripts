@@ -111,6 +111,7 @@ def retention_statistics(data):
     student_alums_who_contribute_to_foss_in_school = 0
     employed_alums = 0
     tech_employed_alums = 0
+    sponsor_employed_alums = 0
     employed_alums_who_use_foss_at_work = 0
     employed_alums_who_contribute_to_foss_at_work = 0
     unemployed_alums = 0
@@ -136,6 +137,8 @@ def retention_statistics(data):
             employed_alums += 1
             if row['Are you employed in the technology industry?'] == 'Yes':
                 tech_employed_alums += 1
+            if row['After your Outreachy internship, were you employed at any of the following Outreachy sponsors?/None of the above'] != '1':
+                sponsor_employed_alums += 1
             if row['Does your job involve using free software / open source?'] == 'Yes':
                 employed_alums_who_use_foss_at_work += 1
             if row['Does your job involve contributing to free software / open source?'] == 'Yes':
@@ -156,6 +159,7 @@ def retention_statistics(data):
     print_percentage(' - Students who contribute to FOSS for school projects or research', student_alums_who_contribute_to_foss_in_school, student_alums)
     print_percentage('Employed', employed_alums, total_alums)
     print_percentage(' - Tech employees', tech_employed_alums, employed_alums)
+    print_percentage(' - Employed by sponsor after internship', sponsor_employed_alums, employed_alums)
     print_percentage(' - Employees who use FOSS as part of their job', employed_alums_who_use_foss_at_work, employed_alums)
     print_percentage(' - Employees who contribute to FOSS as part of their job', employed_alums_who_contribute_to_foss_at_work, employed_alums)
     print_percentage('Unemployed', unemployed_alums, total_alums)
