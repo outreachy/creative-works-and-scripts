@@ -191,6 +191,43 @@ def foss_retention(data):
     print_percentage('Contributes to FOSS', contribute_to_foss, total_alums)
     print_percentage('Does not contribute to FOSS', do_not_contribute_to_foss, total_alums)
 
+def gsoc_and_gsod_connections(data):
+    total_alums = 0
+    gsoc_intern = 0
+    gsoc_mentor = 0
+    gsoc_admin = 0
+    gsod_intern = 0
+    gsod_mentor = 0
+    gsod_admin = 0
+
+    print()
+    print("Connection to GSoC and GSoD")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        total_alums += 1
+
+        if row['After your Outreachy internship, did you participate in Google Summer of Code? (Select all that apply)/Yes, I was a GSoD intern'] == '1':
+            gsoc_intern += 1
+        if row['After your Outreachy internship, did you participate in Google Summer of Code? (Select all that apply)/Yes, I was a GSoD mentor'] == '1':
+            gsoc_mentor += 1
+        if row['After your Outreachy internship, did you participate in Google Summer of Code? (Select all that apply)/Yes, I was a GSoD org admin'] == '1':
+            gsoc_admin += 1
+        if row['After your Outreachy internship, did you participate in Google Season of Docs? (Select all that apply)/Yes, I was a GSoD intern'] == '1':
+            gsod_intern += 1
+        if row['After your Outreachy internship, did you participate in Google Season of Docs? (Select all that apply)/Yes, I was a GSoD mentor'] == '1':
+            gsod_mentor += 1
+        if row['After your Outreachy internship, did you participate in Google Season of Docs? (Select all that apply)/Yes, I was a GSoD org admin'] == '1':
+            gsod_admin += 1
+
+    print('Total alums: {}'.format(total_alums))
+    print_percentage('Google Summer of Code intern after Outreachy', gsoc_intern, total_alums)
+    print_percentage('Google Summer of Code mentor after Outreachy', gsoc_mentor, total_alums)
+    print_percentage('Google Summer of Code org admin after Outreachy', gsoc_admin, total_alums)
+    print_percentage('Google Season of Docs intern after Outreachy', gsod_intern, total_alums)
+    print_percentage('Google Season of Docs mentor after Outreachy', gsod_mentor, total_alums)
+    print_percentage('Google Season of Docs org admin after Outreachy', gsod_admin, total_alums)
+
 def print_successes(data):
     print()
     print("Success stories")
@@ -225,6 +262,7 @@ def main():
     before_outreachy_statistics(data)
     retention_statistics(data)
     foss_retention(data)
+    gsoc_and_gsod_connections(data)
 
     if args.successes == '1':
         print_successes(data)
