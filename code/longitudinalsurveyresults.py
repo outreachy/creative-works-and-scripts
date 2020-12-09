@@ -55,6 +55,112 @@ def race_and_ethnicity_demographics(data):
     print_percentage('Middle Eastern', middle_eastern_alums, total_alums)
     print_percentage('White', white_alums, total_alums)
 
+def before_outreachy_statistics(data):
+    # overview:
+    # 'In the three months before your Outreachy internship, were you:'
+    #  - "A student"
+    #  - "Employed"
+    #  - "Unemployed"
+    #  - "Other"
+    #  - "A full-time parent"
+    student_applicants = 0
+    employed_applicants = 0
+    unemployed_applicants = 0
+    other_applicants = 0
+    parent_applicants = 0
+    total_applicants = 0
+
+    print()
+    print("Before Outreachy")
+    print("---")
+    print()
+
+    for index, row in enumerate(data):
+        total_applicants += 1
+        if row['In the three months before your Outreachy internship, were you:'] == 'A student':
+            student_applicants += 1
+        elif row['In the three months before your Outreachy internship, were you:'] == 'Employed':
+            employed_applicants += 1
+        elif row['In the three months before your Outreachy internship, were you:'] == 'Unemployed':
+            unemployed_applicants += 1
+        elif row['In the three months before your Outreachy internship, were you:'] == 'A full time parent':
+            parent_applicants += 1
+        elif row['In the three months before your Outreachy internship, were you:'] == 'Other':
+            other_applicants += 1
+            print("Other:", row['In the three months before your Outreachy internship, what was your employment or educational situation?'])
+
+    print()
+    print('Total alums: {}'.format(total_applicants))
+    print_percentage('Students', student_applicants, total_applicants)
+    print_percentage('Employed', employed_applicants, total_applicants)
+    print_percentage('Unemployed', unemployed_applicants, total_applicants)
+    print_percentage('Parents', parent_applicants, total_applicants)
+    print_percentage('Other', other_applicants, total_applicants)
+
+def retention_statistics(data):
+    # overview:
+    # 'Are you currently:'
+    #  - "A student"
+    #  - "Employed"
+    #  - "Unemployed"
+    #  - "Other"
+    #  - "A full-time parent"
+    student_alums = 0
+    stem_student_alums = 0
+    student_alums_who_use_foss_in_school = 0
+    student_alums_who_contribute_to_foss_in_school = 0
+    employed_alums = 0
+    tech_employed_alums = 0
+    employed_alums_who_use_foss_at_work = 0
+    employed_alums_who_contribute_to_foss_at_work = 0
+    unemployed_alums = 0
+    other_alums = 0
+    parent_alums = 0
+    total_alums = 0
+
+    print()
+    print("Current Employment and Education status of alums")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        total_alums += 1
+        if row['Are you currently:'] == 'A student':
+            student_alums += 1
+            if row['Are you a student in a science, technology, engineering, or mathematics field?'] == 'Yes':
+                stem_student_alums += 1
+            if row['Do you use free software / open source to complete your student projects or research?'] == 'Yes':
+                student_alums_who_use_foss_in_school += 1
+            if row['Do you contribute to free software / open source as part of your student projects or research?'] == 'Yes':
+                student_alums_who_contribute_to_foss_in_school += 1
+        elif row['Are you currently:'] == 'Employed':
+            employed_alums += 1
+            if row['Are you employed in the technology industry?'] == 'Yes':
+                tech_employed_alums += 1
+            if row['Does your job involve using free software / open source?'] == 'Yes':
+                employed_alums_who_use_foss_at_work += 1
+            if row['Does your job involve contributing to free software / open source?'] == 'Yes':
+                employed_alums_who_contribute_to_foss_at_work += 1
+        elif row['Are you currently:'] == 'Unemployed':
+            unemployed_alums += 1
+        elif row['Are you currently:'] == 'A full-time parent':
+            parent_alums += 1
+        elif row['Are you currently:'] == 'Other':
+            other_alums += 1
+            print("Other:", row['What is your current employment or educational situation?'])
+
+    print()
+    print('Total alums: {}'.format(total_alums))
+    print_percentage('Students', student_alums, total_alums)
+    print_percentage(' - STEM students', stem_student_alums, student_alums)
+    print_percentage(' - Students who use FOSS for school projects or research', student_alums_who_use_foss_in_school, student_alums)
+    print_percentage(' - Students who contribute to FOSS for school projects or research', student_alums_who_contribute_to_foss_in_school, student_alums)
+    print_percentage('Employed', employed_alums, total_alums)
+    print_percentage(' - Tech employees', tech_employed_alums, employed_alums)
+    print_percentage(' - Employees who use FOSS as part of their job', employed_alums_who_use_foss_at_work, employed_alums)
+    print_percentage(' - Employees who contribute to FOSS as part of their job', employed_alums_who_contribute_to_foss_at_work, employed_alums)
+    print_percentage('Unemployed', unemployed_alums, total_alums)
+    print_percentage('Parents', parent_alums, total_alums)
+
 def main():
     parser = argparse.ArgumentParser(description='Print statistics from 2019 Outreachy longitudinal survey')
     parser.add_argument('--csv', help='CSV file of longitudinal survey responses')
@@ -67,6 +173,8 @@ def main():
             data.append(row)
 
     race_and_ethnicity_demographics(data)
+    before_outreachy_statistics(data)
+    retention_statistics(data)
 
 if __name__ == "__main__":
     main()
