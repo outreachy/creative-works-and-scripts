@@ -191,9 +191,28 @@ def foss_retention(data):
     print_percentage('Contributes to FOSS', contribute_to_foss, total_alums)
     print_percentage('Does not contribute to FOSS', do_not_contribute_to_foss, total_alums)
 
+def print_successes(data):
+    print()
+    print("Success stories")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        if row['After your Outreachy internship, did you win any awards?'] != '':
+            print("Award:", row['First Name / Given Name'], row['Last Name / Family Name'], row['After your Outreachy internship, did you win any awards?'])
+
+        if row['After your Outreachy internship, did you take on any leadership roles?'] != '':
+            print("Leadership role:", row['First Name / Given Name'], row['Last Name / Family Name'], row['After your Outreachy internship, did you take on any leadership roles?'])
+
+        if row['Tell us more about your successes after Outreachy!'] != '':
+            print("Success story:", row['First Name / Given Name'], row['Last Name / Family Name'], row['Tell us more about your successes after Outreachy!'])
+
+        if row['After your Outreachy internship, did you win any awards?'] != '' or row['After your Outreachy internship, did you take on any leadership roles?'] != '' or row['Tell us more about your successes after Outreachy!'] != '':
+            print()
+
 def main():
     parser = argparse.ArgumentParser(description='Print statistics from 2019 Outreachy longitudinal survey')
     parser.add_argument('--csv', help='CSV file of longitudinal survey responses')
+    parser.add_argument('--successes', help='Use `--successes 1` to print awards, leadership positions, and success stories of Outreachy alums')
     args = parser.parse_args()
 
     data = []
@@ -206,6 +225,9 @@ def main():
     before_outreachy_statistics(data)
     retention_statistics(data)
     foss_retention(data)
+
+    if args.successes == '1':
+        print_successes(data)
 
 if __name__ == "__main__":
     main()
