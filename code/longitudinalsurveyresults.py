@@ -228,6 +228,52 @@ def gsoc_and_gsod_connections(data):
     print_percentage('Google Season of Docs mentor after Outreachy', gsod_mentor, total_alums)
     print_percentage('Google Season of Docs org admin after Outreachy', gsod_admin, total_alums)
 
+def foss_talks(data):
+    total_alums = 0
+    gave_talk = 0
+
+    print()
+    print("Conference talks on FOSS")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        total_alums += 1
+
+        if row['During or after your Outreachy internship, did you give a talk or presentation on free software/open source?'] == 'Yes':
+            gave_talk += 1
+
+    print('Total alums: {}'.format(total_alums))
+    print_percentage('Gave a conference talks or presentation on FOSS', gave_talk, total_alums)
+
+def mentorship(data):
+    total_alums = 0
+    outreachy_coordinator = 0
+    outreachy_mentor = 0
+    outreachy_volunteer = 0
+    generic_mentor = 0
+
+    print()
+    print("Mentorship")
+    print("---")
+    print()
+    for index, row in enumerate(data):
+        total_alums += 1
+
+        if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an Outreachy coordinator'] == '1':
+            outreachy_coordinator += 1
+        if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an Outreachy mentor'] == '1':
+            outreachy_mentor += 1
+        if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an informal Outreachy volunteer'] == '1':
+            outreachy_volunteer += 1
+        if row['After your Outreachy internship, did you become a mentor?'].startswith('Yes'):
+            generic_mentor += 1
+
+    print('Total alums: {}'.format(total_alums))
+    print_percentage('Became Outreachy coordinator', outreachy_coordinator, total_alums)
+    print_percentage('Became Outreachy mentor', outreachy_mentor, total_alums)
+    print_percentage('Became Outreachy volunteer', outreachy_volunteer, total_alums)
+    print_percentage('Became a mentor', generic_mentor, total_alums)
+
 def print_successes(data):
     print()
     print("Success stories")
@@ -263,6 +309,8 @@ def main():
     retention_statistics(data)
     foss_retention(data)
     gsoc_and_gsod_connections(data)
+    foss_talks(data)
+    mentorship(data)
 
     if args.successes == '1':
         print_successes(data)
