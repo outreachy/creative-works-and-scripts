@@ -261,8 +261,10 @@ def mentorship(data):
 
         if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an Outreachy coordinator'] == '1':
             outreachy_coordinator += 1
+            print(row['First Name / Given Name'], row['Last Name / Family Name'], "Outreachy coordinator")
         if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an Outreachy mentor'] == '1':
             outreachy_mentor += 1
+            print(row['First Name / Given Name'], row['Last Name / Family Name'], "Outreachy mentor")
         if row['After your Outreachy internship, did you volunteer for Outreachy? (Select all that apply)/Yes, I was an informal Outreachy volunteer'] == '1':
             outreachy_volunteer += 1
         if row['After your Outreachy internship, did you become a mentor?'].startswith('Yes'):
