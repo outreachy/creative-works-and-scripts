@@ -33,6 +33,8 @@ def race_and_ethnicity_demographics(data):
     indigenous_alums = 0
     middle_eastern_alums = 0
     white_alums = 0
+    disadvantaged_caste = 0
+    disadvantaged_tribe = 0
     for index, row in enumerate(data):
         total_alums += 1
         if row['What is your race and ethnicity? (Select all that apply)/Asian'] == '1':
@@ -47,6 +49,10 @@ def race_and_ethnicity_demographics(data):
             middle_eastern_alums += 1
         if row['What is your race and ethnicity? (Select all that apply)/White'] == '1':
             white_alums += 1
+        if row['Are you a member of a historically disadvantaged caste / scheduled caste?'] == 'Yes':
+            disadvantaged_caste += 1
+        if row['Are you a member of a historically disadvantaged tribe?'] == 'Yes':
+            disadvantaged_tribe += 1
 
     print('Total alums: {}'.format(total_alums))
     print_percentage('Asian', asian_alums, total_alums)
@@ -54,6 +60,44 @@ def race_and_ethnicity_demographics(data):
     print_percentage('Hispanic or Latinx', hispanic_or_latinx_alums, total_alums)
     print_percentage('Middle Eastern', middle_eastern_alums, total_alums)
     print_percentage('White', white_alums, total_alums)
+    print_percentage('Historically disadvantaged caste or scheduled caste', disadvantaged_caste, total_alums)
+    print_percentage('Historically disadvantaged tribe', disadvantaged_tribe, total_alums)
+
+def gender_identities_demographics(data):
+    # demographics:
+    # 'What is your gender identity? (Select all that apply)/Woman'
+    total_alums = 0
+    men_alums = 0
+    women_alums = 0
+    non_binary_alums = 0
+    other_gender_identity = 0
+    cis_alums = 0
+    trans_alums = 0
+    for index, row in enumerate(data):
+        total_alums += 1
+        if row['What is your gender identity? (Select all that apply)/Man'] == '1':
+            men_alums += 1
+        if row['What is your gender identity? (Select all that apply)/Woman'] == '1':
+            women_alums += 1
+        if row['What is your gender identity? (Select all that apply)/Non-binary'] == '1':
+            non_binary_alums += 1
+        if row["What is your gender identity? (Select all that apply)/My gender isn't listed here"] == '1':
+            other_gender_identity += 1
+
+        if row['Do you identify as transgender?'] == 'No':
+            cis_alums += 1
+        elif row['Do you identify as transgender?'] == 'Yes':
+            trans_alums += 1
+
+    print("")
+    print("Gender Identities")
+    print("---")
+    print_percentage('Men', men_alums, total_alums)
+    print_percentage('Women', women_alums, total_alums)
+    print_percentage('Non-binary', non_binary_alums, total_alums)
+    print_percentage('Other gender identity', other_gender_identity, total_alums)
+    print_percentage('Cisgender', cis_alums, total_alums)
+    print_percentage('Transgender', trans_alums, total_alums)
 
 def before_outreachy_statistics(data):
     # overview:
@@ -307,6 +351,7 @@ def main():
             data.append(row)
 
     race_and_ethnicity_demographics(data)
+    gender_identities_demographics(data)
     before_outreachy_statistics(data)
     retention_statistics(data)
     foss_retention(data)
