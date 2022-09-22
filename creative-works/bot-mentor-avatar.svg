@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg2915"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="bot-mentor-avatar.svg">
+  <defs
+     id="defs2909" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.1980478"
+     inkscape:cx="334.06896"
+     inkscape:cy="205.97725"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0" />
+  <metadata
+     id="metadata2912">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       inkscape:connector-curvature="0"
+       d="m 67.241984,61.165098 h 13.907653 c 0.889283,0 1.610257,0.888857 1.610257,1.609206 v 6.374905 c 0,0.888836 -0.720974,1.609469 -1.610257,1.609469 H 67.241984 c -0.720852,0 -1.61013,-0.720633 -1.61013,-1.609469 v -6.374905 c 0,-0.720349 0.889278,-1.609206 1.61013,-1.609206 z"
+       style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332"
+       id="path3642"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3652"
+       d="m 75.098071,47.186443 c 0,0.435287 -0.367765,0.788164 -0.821436,0.788164 -0.453667,0 -0.821438,-0.352877 -0.821438,-0.788164 0,-0.435285 0.367771,-0.788162 0.821438,-0.788162 0.414481,0 0.764022,0.296275 0.815166,0.690922"
+       style="fill:#0d7ab1;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3654"
+       d="m 74.054166,47.71725 h 0.444942 v 2.477079 h -0.444942 z"
+       style="fill:#0d7ab1;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <g
+       style="display:inline;fill:#0d7ab1;fill-opacity:1"
+       inkscape:export-ydpi="544.72845"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       id="g3656"
+       transform="matrix(-0.27099654,0,0,0.27086552,-356.79722,-28.690485)">
+      <path
+         inkscape:connector-curvature="0"
+         d="m -1557.9217,342.28603 9.6331,-9.63312 c 1.02,-1.01998 0.8268,-2.86625 0,-3.69299 l -2.7532,-2.75318 c -1.0195,-1.01999 -2.673,-1.01999 -3.6925,0 l -9.6336,9.63358 c -0.8262,0.82627 -1.0195,2.673 0,3.69253 l 2.7532,2.75318 c 0.8268,0.82674 2.8663,0.82674 3.693,0 z"
+         style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path3658"
+         inkscape:export-filename="/home/yuliansu/Desktop/gnome/vi/draft/coscup.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
+    </g>
+    <path
+       id="path3660"
+       d="m 69.091292,48.869706 c -0.03348,-0.0018 -0.06903,0.0024 -0.101614,0.0085 -0.451432,0.05695 -0.858226,0.383805 -0.982358,0.846452 l -0.711385,2.649403 c -0.798912,0.848797 -1.270251,1.858317 -1.270251,2.937198 0,3.03317 3.662846,5.493491 8.172217,5.493491 4.509426,0 8.172217,-2.460321 8.172217,-5.493491 0,-1.077503 -0.464698,-2.089026 -1.261798,-2.937198 l -0.719828,-2.649399 c -0.142571,-0.531847 -0.648822,-0.878589 -1.17716,-0.846453 -0.07537,0.01254 -0.152673,0.03917 -0.228656,0.05925 -1.013571,0.363763 -2.284799,0.392856 -3.150349,0.990349 -0.527669,-0.07154 -1.075166,-0.110035 -1.634426,-0.110035 -0.56133,0 -1.104895,0.03725 -1.634451,0.110035 0,1.32e-4 -0.01696,-1.67e-4 -0.01696,0 -0.8802,-0.587838 -2.079789,-0.7111 -3.133374,-0.990349 -0.07537,-0.02003 -0.14461,-0.05549 -0.220199,-0.05925 -0.03325,0 -0.06806,-0.0069 -0.101653,-0.0085 z"
+       style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.26458332"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3662"
+       d="m 70.478128,53.353724 h 0.0084 c 0.02766,0 0.0486,0.01685 0.07623,0.01685 h 1.973279 c 0.449693,0 0.813006,0.352975 0.813006,0.800381 v 1.946187 c 0,0.447406 -0.363313,0.825654 -0.813006,0.825654 h -1.973279 c -0.449858,0 -0.804579,-0.378248 -0.804508,-0.825654 v -1.946187 c 0,-0.39156 0.273013,-0.725292 0.643636,-0.800381 0.02627,0 0.04855,-0.01685 0.07619,-0.01685 z"
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.264583"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3664"
+       d="m 75.737134,53.336899 c 0.02766,0 0.0571,0.01693 0.0847,0.01693 h 1.964722 c 0.449837,0 0.821444,0.354621 0.821444,0.80413 v 1.955311 c 0,0.449506 -0.371589,0.829527 -0.821444,0.829527 h -1.964722 c -0.449731,0 -0.821465,-0.380021 -0.821465,-0.829527 v -1.955311 c 0,-0.393393 0.281461,-0.728689 0.652095,-0.804129 0.0263,0 0.05707,-0.01693 0.08467,-0.01693 z"
+       style="display:inline;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.264583"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path3679"
+       d="m 76.521606,61.242393 c -0.09273,1.304586 -1.180978,2.334154 -2.509792,2.334154 -1.32864,0 -2.416744,-1.029264 -2.509763,-2.333567"
+       style="fill:none;stroke:#ffffff;stroke-width:0.29078385;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <g
+       style="stroke:none"
+       transform="matrix(0.458754,0.06170142,-0.06173127,0.45853218,-128.18628,-380.34699)"
+       id="g3681"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845">
+      <rect
+         style="fill:#ffffff;fill-opacity:1;stroke:none"
+         id="rect3683"
+         width="10.5"
+         height="14.5"
+         x="556"
+         y="454.75"
+         transform="translate(0,436.362)"
+         rx="1.7723097"
+         ry="1.87524" />
+      <g
+         id="g3685"
+         style="fill:#0d7ab1;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         transform="matrix(0.0911648,0,0,0.0911904,557.212,893.828)">
+        <g
+           id="g3687"
+           style="fill:#0d7ab1;fill-opacity:1;stroke:none"
+           transform="translate(-3.80751,1.94297)" />
+      </g>
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       d="m 68.599082,74.375529 h 3.813357 c 0.403768,0 0.730986,-0.402423 0.730986,-0.728541 v -1.086173 c 0,-0.40242 -0.327218,-0.728411 -0.730986,-0.728411 h -3.813357 c -0.327202,0 -0.730867,0.325991 -0.730867,0.728411 v 1.086173 c 0,0.326118 0.403665,0.728541 0.730867,0.728541 z"
+       style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332"
+       id="path3644"
+       inkscape:export-filename="/home/yuliansu/Desktop/robot.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <path
+       inkscape:connector-curvature="0"
+       d="M 76.345545,74.375529 H 80.1589 c 0.403801,0 0.730972,-0.402423 0.730972,-0.728541 v -1.086173 c 0,-0.40242 -0.327171,-0.728411 -0.730972,-0.728411 h -3.813355 c -0.327205,0 -0.730991,0.325991 -0.730991,0.728411 v 1.086173 c 0,0.326118 0.403786,0.728541 0.730991,0.728541 z"
+       style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.26458332"
+       id="path3646"
+       inkscape:export-filename="/home/yuliansu/Desktop/robot.png"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:bold;font-size:3.175px;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'Sans Bold';letter-spacing:0px;word-spacing:0px;fill:#0d7ab1;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="79.826805"
+       y="57.049297"
+       id="text7241"
+       transform="rotate(7.9550895)"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-ydpi="544.72845"><tspan
+         sodipodi:role="line"
+         id="tspan7243"
+         x="79.826805"
+         y="57.049297"
+         style="font-size:4.69492px;line-height:1.25;font-family:sans-serif;stroke-width:0.264583">M</tspan></text>
+    <g
+       style="display:inline;fill:#0d7ab1;fill-opacity:1"
+       inkscape:export-ydpi="544.72845"
+       inkscape:export-xdpi="544.72845"
+       inkscape:export-filename="/home/christy/Desktop/gnome/comix/GNOMErobots_christy_blue_version_larger.png"
+       id="g3656-6"
+       transform="matrix(0.27099654,0,0,0.27086552,505.31723,-29.133643)">
+      <path
+         inkscape:connector-curvature="0"
+         d="m -1557.9217,342.28603 9.6331,-9.63312 c 1.02,-1.01998 0.8268,-2.86625 0,-3.69299 l -2.7532,-2.75318 c -1.0195,-1.01999 -2.673,-1.01999 -3.6925,0 l -9.6336,9.63358 c -0.8262,0.82627 -1.0195,2.673 0,3.69253 l 2.7532,2.75318 c 0.8268,0.82674 2.8663,0.82674 3.693,0 z"
+         style="display:inline;fill:#0d7ab1;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="path3658-0"
+         inkscape:export-filename="/home/yuliansu/Desktop/gnome/vi/draft/coscup.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
+    </g>
+  </g>
+</svg>
