@@ -13,3 +13,11 @@ If someone doesn't want to sign the photo and video release, or does not want to
 These props can be held by attendees while taking pictures. The props can be printed and taped to a stick. They can be held by attendees while they are taking photos with each other or by the Outreachy celebration banner.
 
 The photo frame can be put on digital pictures shared on social media, like Instagram or Mastodon.
+
+## Stickers
+
+There are two stickers that we will be using for the event. It is recommended to purchase die-cut stickers from Sticker Robot, or your local sticker vendor.
+
+The first sticker is the Outreachy logo. If you modify this design, please make sure to include the "stairs". The stairs represent Outreachy helping interns "level up" their skills and take the next steps in their career.
+
+The sticker with animal on it is a "manatee mentoring their mentee". It represents Outreachy mentors working with their interns.
