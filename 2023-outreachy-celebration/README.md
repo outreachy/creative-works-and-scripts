@@ -11,6 +11,7 @@ If someone doesn't want to sign the photo and video release or does not want to 
 ## Tote bag
 
 The file contains both the front and back designs of the tote bag. 
+
 The front design contains the Outreachy logo and a summary of what the program stands for: "Paid Remote Internship. 
 The back design contains what we stand to achieve: "Supporting Diversity in Open Source and Open Science."
 
@@ -20,11 +21,11 @@ There are two different designs for the bottles.
 
 The first design has an Outreachy logo, a summary of what the program stands for: "Paid Remote Internship, and what we stand to achieve: "Supporting Diversity in Open Source and Open Science."
 
-The second design has a sticker with animals on it is a "manatee mentoring their mentee." It represents Outreachy mentors working with their interns.
+The second design has a sticker with animals: a "manatee mentoring their mentee." It represents Outreachy mentors working with their interns.
 
 ## Props
 
-These props can be held by attendees while taking pictures. The props can be printed and taped to a stick. Attendees can hold them while taking photos with each other or by the Outreachy celebration banner.
+Attendees can hold these props while taking pictures. The props can be printed and taped to a stick. Attendees can hold them while taking photos with each other or by the Outreachy celebration banner.
 
 The photo frame can be put on digital social media pictures like Instagram or Mastodon.
 
@@ -35,3 +36,11 @@ There are two stickers that we will be using for the event. Purchasing die-cut s
 The first sticker is the Outreachy logo. If you modify this design, please include the "stairs." The stairs represent Outreachy helping interns "level up" their skills and take the next steps in their careers.
 
 The sticker with animals on it is a "manatee mentoring their mentee." It represents Outreachy mentors working with their interns.
+
+## t-shirt
+
+For this celebration, the shirt has design templates for the front, back, and right hand. 
+Front: a sticker with animals: a "manatee mentoring their mentee.
+Back: The first design has an Outreachy logo, a summary of what the program stands for: "Paid Remote Internship, and what we stand to achieve: "Supporting Diversity in Open Source and Open Science."
+Right Hand: A design of locations (in the country flag) where the celebration will be held.
+
