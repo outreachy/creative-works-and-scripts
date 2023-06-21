@@ -2,7 +2,7 @@
 
 We recommend using these t-shirts design files:
  - [front](https://github.com/outreachy/creative-works-and-scripts/blob/master/2023-outreachy-celebration/t-shirt/2023-final-shirt-design-front.svg)
- - [back](https://github.com/outreachy/creative-works-and-scripts/blob/master/2023-outreachy-celebration/t-shirt/2023-final-shirt-design-back-usa.svg))
+ - [back](https://github.com/outreachy/creative-works-and-scripts/blob/master/2023-outreachy-celebration/t-shirt/2023-final-shirt-design-back.svg))
 
 If your t-shirt printer allows it, we suggest having a print on one arm of the t-shirt. The arm print can include your event location's country shape and country flag, with the words 1,000 Outreachy intern celebration. Design files:
  - [design files](https://github.com/outreachy/creative-works-and-scripts/tree/master/2023-outreachy-celebration/t-shirt/Shirt/Right%20Hand%20printables)
