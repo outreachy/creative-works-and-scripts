@@ -1,17 +1,13 @@
-# License
+# T-shirt design
 
-Some of the jpg files in this folder are not copy-left licensed. They are t-shirt stock photos used to mock up our t-shirt design.
+We recommend using these t-shirts design files:
+ - [front](https://github.com/outreachy/creative-works-and-scripts/blob/master/2023-outreachy-celebration/t-shirt/2023-final-shirt-design-front.svg)
+ - [back](https://github.com/outreachy/creative-works-and-scripts/blob/master/2023-outreachy-celebration/t-shirt/2023-final-shirt-design-back-usa.svg))
 
-The following files were downloaded from https://www.sportswearcollection.com:
+If your t-shirt printer allows it, we suggest having a print on one arm of the t-shirt. The arm print can include your event location's country shape and country flag, with the words 1,000 Outreachy intern celebration. Design files:
+ - [design files](https://github.com/outreachy/creative-works-and-scripts/tree/master/2023-outreachy-celebration/t-shirt/Shirt/Right%20Hand%20printables)
 
- - bella-canvas-womens-jersey-long-sleeve-back.jpg
- - bella-canvas-womens-jersey-long-sleeve-front.jpg
- - gideon-dry-blend-unisex-back.jpg
- - gideon-dry-blend-unisex-front.jpg
- - gideon-heavy-cotton-mens-back.jpg
- - gideon-heavy-cotton-mens-front.jpg
- - gideon-soft-style-womens-back.jpg
- - gideon-soft-style-womens-front.jpg
+(Note: the USA t-shirt will not include a location arm print because the screen printer cannot do arm prints.)
 
 # USA celebration t-shirts
 
