@@ -114,7 +114,54 @@
 				
 			
 		
-	</defs><sodipodi:namedview
+	
+					
+				
+						
+					
+				
+			
+					
+				
+						
+					
+				
+			
+					
+				
+						
+					
+		
+		
+		
+		
+		
+		
+		
+	
+		
+	
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		
+			
+				
+		</defs><sodipodi:namedview
    pagecolor="#000000"
    bordercolor="#666666"
    borderopacity="1"
@@ -127,9 +174,9 @@
    inkscape:window-height="1016"
    id="namedview447"
    showgrid="false"
-   inkscape:zoom="0.66"
-   inkscape:cx="241.2777"
-   inkscape:cy="611.1251"
+   inkscape:zoom="0.93"
+   inkscape:cx="474.97574"
+   inkscape:cy="382.4378"
    inkscape:window-x="0"
    inkscape:window-y="27"
    inkscape:window-maximized="1"
@@ -149,18 +196,13 @@
 
 
 <g
-   id="g4301"
-   inkscape:export-xdpi="599.97998"
-   inkscape:export-ydpi="599.97998"><g
-     id="g9"
-     inkscape:export-xdpi="299.99124"
-     inkscape:export-ydpi="299.99124">
-		<polygon
-   style="fill:#5dc9df"
-   id="polygon7"
-   points="331.6,698.6 153.7,682.3 203.5,579.7 381.2,582.6 "
-   class="st1" />
-	</g><g
+   id="g4953"
+   inkscape:export-xdpi="600"
+   inkscape:export-ydpi="600"><polygon
+     style="fill:#00a7d4;fill-opacity:1"
+     id="polygon7"
+     points="331.6,698.6 153.7,682.3 203.5,579.7 381.2,582.6 "
+     class="st1" /><g
      id="g25"
      style="fill:#002b4b;fill-opacity:1"
      inkscape:export-xdpi="299.99124"
@@ -203,104 +245,65 @@
 		<polygon
    style="fill:#002b4b;fill-opacity:1"
    id="polygon27"
-   points="357.9,595.6 313.8,593.9 330.8,657.6 "
+   points="330.8,657.6 357.9,595.6 313.8,593.9 "
    class="st4" />
-	</g><g
-     id="g67"
-     inkscape:export-xdpi="299.99124"
-     inkscape:export-ydpi="299.99124">
-		<g
-   id="g41">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect39"
-   height="28.799999"
-   width="2"
-   class="st6"
-   transform="matrix(0.09320417,-0.9956,0.9956,0.09320417,-308.5636,894.6133)"
-   y="602.29999"
-   x="335.89999" />
-		</g>
-		<g
-   id="g45">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect43"
-   height="38.200001"
-   width="2"
-   class="st6"
-   transform="matrix(0.07953055,-0.9968,0.9968,0.07953055,-292.7726,893.2581)"
-   y="586.09998"
-   x="336.29999" />
-		</g>
-		<g
-   id="g49">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect47"
-   height="2"
-   width="16.5"
-   class="st6"
-   transform="matrix(0.3897,-0.921,0.921,0.3897,-341.3584,680.3774)"
-   y="596.70001"
-   x="334.39999" />
-		</g>
-		<g
-   id="g53">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect51"
-   height="2"
-   width="14.5"
-   class="st6"
-   transform="matrix(0.3897,-0.921,0.921,0.3897,-374.1343,680.7816)"
-   y="621.70001"
-   x="319.29999" />
-		</g>
-		<g
-   id="g57">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect55"
-   height="2"
-   width="58.799999"
-   class="st6"
-   transform="matrix(0.3897,-0.921,0.921,0.3897,-370.171,670.7034)"
-   y="613.59998"
-   x="291.5" />
-		</g>
-		<g
-   id="g61">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect59"
-   height="24.5"
-   width="2"
-   class="st6"
-   transform="matrix(0.08278526,-0.9966,0.9966,0.08278526,-333.7371,923.6906)"
-   y="630.90002"
-   x="333.89999" />
-		</g>
-		<g
-   id="g65">
-			
-				<rect
-   style="fill:#5ec9e1"
-   id="rect63"
-   height="24.5"
-   width="2"
-   class="st6"
-   transform="matrix(0.08278526,-0.9966,0.9966,0.08278526,-320.6842,910.4547)"
-   y="617.20001"
-   x="333.29999" />
-		</g>
-	</g><g
+	</g><rect
+     style="fill:#00a7d4;stroke-width:0.999953;fill-opacity:1"
+     id="rect39"
+     height="28.798651"
+     width="1.9999064"
+     class="st6"
+     transform="rotate(-84.651781)"
+     y="378.43707"
+     x="-583.59521" /><rect
+     style="fill:#00a7d4;stroke-width:0.999968;fill-opacity:1"
+     id="rect43"
+     height="38.198765"
+     width="1.9999354"
+     class="st6"
+     transform="rotate(-85.43827)"
+     y="365.27948"
+     x="-577.42444" /><rect
+     style="fill:#00a7d4;stroke-width:1.00005;fill-opacity:1"
+     id="rect47"
+     height="2.000107"
+     width="16.500883"
+     class="st6"
+     transform="rotate(-67.065464)"
+     y="547.48657"
+     x="-425.19638" /><rect
+     style="fill:#00a7d4;stroke-width:1.00005;fill-opacity:1"
+     id="rect51"
+     height="2.000107"
+     width="14.500776"
+     class="st6"
+     transform="rotate(-67.065464)"
+     y="542.46045"
+     x="-453.44153" /><rect
+     style="fill:#00a7d4;stroke-width:1.00005;fill-opacity:1"
+     id="rect55"
+     height="2.000107"
+     width="58.803146"
+     class="st6"
+     transform="rotate(-67.065464)"
+     y="534.0827"
+     x="-470.41705" /><rect
+     style="fill:#00a7d4;stroke-width:1.00003;fill-opacity:1"
+     id="rect59"
+     height="24.500795"
+     width="2.0000648"
+     class="st6"
+     transform="rotate(-85.251474)"
+     y="374.7944"
+     x="-614.23694" /><rect
+     style="fill:#00a7d4;stroke-width:1.00003;fill-opacity:1"
+     id="rect63"
+     height="24.500795"
+     width="2.0000648"
+     class="st6"
+     transform="rotate(-85.251474)"
+     y="373.00635"
+     x="-600.56592" /><g
      id="g33"
      inkscape:export-xdpi="299.99124"
      inkscape:export-ydpi="299.99124">
@@ -325,7 +328,7 @@
 		<polygon
    style="fill:#002b4b;fill-opacity:1"
    id="polygon69"
-   points="310.1,547.1 336.8,689.4 373.7,603.6 381.1,603.9 337.6,704 321.6,633.9 305.7,553.3 "
+   points="373.7,603.6 381.1,603.9 337.6,704 321.6,633.9 305.7,553.3 310.1,547.1 336.8,689.4 "
    class="st4" />
 	</g><g
      id="g81"
@@ -470,9 +473,9 @@
    d="m 391.6,397.5 c -1.6,-4.6 -2.8,-6.7 -5.2,-9.9 4.2,12.1 7,24.6 6,37.5 1.8,-5.1 2,-7.5 2.1,-11.5 -0.1,-5.4 -1.2,-11.2 -2.9,-16.1 z"
    class="st2" />
 	</g><polygon
-     style="fill:#5ec9e1"
+     style="fill:#00a7d4;fill-opacity:1"
      id="polygon131"
-     points="153.7,682.3 331.6,698.6 303.7,556.1 113.6,553.8 "
+     points="303.7,556.1 113.6,553.8 153.7,682.3 331.6,698.6 "
      class="st6"
      inkscape:export-xdpi="299.99124"
      inkscape:export-ydpi="299.99124" /><g
@@ -483,7 +486,7 @@
 		<polygon
    style="fill:#002b4b;fill-opacity:1"
    id="polygon135"
-   points="305.7,553.3 107,548.8 113.7,543.7 310.1,547.1 "
+   points="113.7,543.7 310.1,547.1 305.7,553.3 107,548.8 "
    class="st4" />
 	</g><g
      id="g141"
@@ -764,7 +767,7 @@
      class="st6"
      d="m 37.1,175.6 c 10.7,1 16,1.3 26.5,1.5 -1,-9.1 -1.6,-13.7 -2.6,-22.9 10.9,0.2 16.4,0.1 27.2,-0.6 -1.1,-9.6 -1.6,-14.4 -2.7,-24 142,-11.7 273.6,-89.6 417.7,-79.2 1.1,10 1.7,15 2.8,25.1 -10.7,-1 -16,-1.3 -26.5,-1.5 1,9.1 1.6,13.7 2.6,22.9 -10.2,-0.2 -15.3,-0.1 -25.4,0.5 1.1,10 1.7,15.1 2.9,25.1 -142.7,11.2 -274.8,89.7 -419.5,79.3 -1.2,-10.5 -1.8,-15.8 -3,-26.2 z"
      id="path248"
-     style="fill:#5ec9e1;fill-opacity:1"
+     style="fill:#00a7d4;fill-opacity:1"
      inkscape:export-xdpi="299.99124"
      inkscape:export-ydpi="299.99124" /><g
      id="g4085"
@@ -896,46 +899,19 @@
    style="fill:#ffffff" />
 					</g>
 				</g>
-			</g><g
-     id="g322"
-     inkscape:export-xdpi="299.99124"
-     inkscape:export-ydpi="299.99124">
-					<g
-   id="g320">
-						<path
-   class="st6"
-   d="m 417.3,598 v 0 c -9.3,-1.9 -18.9,-5 -27.5,-8.9 0,-6 0,-9 0,-15 5.7,2.5 8.6,3.6 14.3,5.4 0,-5.3 0,-7.9 0,-13.2 5.3,1.7 8,2.4 13.3,3.5 0,-5.7 0,-8.6 0,-14.4 71.7,12.3 139,-20.8 210.2,-21.4 0,14.2 0,28.3 0,42.5 -71.3,0.7 -138.6,33.7 -210.3,21.5 z"
-   id="path318" />
-					</g>
-				</g><g
-     id="g332"
-     inkscape:export-xdpi="299.99124"
-     inkscape:export-ydpi="299.99124">
-				<g
-   id="g330">
-					<g
-   id="g328">
-						<path
-   class="st6"
-   d="m 438.4,606.5 c 0,14.2 0,28.3 0,42.5 76.2,3 148,-35.5 224.3,-19.7 0,-14.2 0,-28.3 0,-42.5 -76.3,-15.8 -148.1,22.7 -224.3,19.7 z"
-   id="path326" />
-					</g>
-				</g>
-			</g><g
-     id="g340"
-     inkscape:export-xdpi="299.99124"
-     inkscape:export-ydpi="299.99124">
-				<g
-   id="g338">
-					<g
-   id="g336">
-						<path
-   class="st6"
-   d="m 665.6,650.3 c 0,5.3 0,7.9 0,13.2 -5.3,-1.5 -8,-2.1 -13.3,-3 0,5.7 0,8.6 0,14.4 -61.6,-8.4 -119.6,14.5 -180.2,21.5 0,-14.2 0,-28.3 0,-42.5 60.6,-7 118.6,-29.9 180.2,-21.5 v 0 c 9.2,1.6 18.9,4.3 27.5,7.8 0,6 0,9 0,15 -5.6,-2.3 -8.5,-3.3 -14.2,-4.9 z"
-   id="path334" />
-					</g>
-				</g>
-			</g><g
+			</g><path
+     class="st6"
+     d="m 417.3,598 v 0 c -9.3,-1.9 -18.9,-5 -27.5,-8.9 0,-6 0,-9 0,-15 5.7,2.5 8.6,3.6 14.3,5.4 0,-5.3 0,-7.9 0,-13.2 5.3,1.7 8,2.4 13.3,3.5 0,-5.7 0,-8.6 0,-14.4 71.7,12.3 139,-20.8 210.2,-21.4 0,14.2 0,28.3 0,42.5 -71.3,0.7 -138.6,33.7 -210.3,21.5 z"
+     id="path318"
+     style="fill:#00a7d4;fill-opacity:1" /><path
+     class="st6"
+     d="m 438.4,606.5 c 0,14.2 0,28.3 0,42.5 76.2,3 148,-35.5 224.3,-19.7 0,-14.2 0,-28.3 0,-42.5 -76.3,-15.8 -148.1,22.7 -224.3,19.7 z"
+     id="path326"
+     style="fill:#00a7d4;fill-opacity:1" /><path
+     class="st6"
+     d="m 665.6,650.3 c 0,5.3 0,7.9 0,13.2 -5.3,-1.5 -8,-2.1 -13.3,-3 0,5.7 0,8.6 0,14.4 -61.6,-8.4 -119.6,14.5 -180.2,21.5 0,-14.2 0,-28.3 0,-42.5 60.6,-7 118.6,-29.9 180.2,-21.5 v 0 c 9.2,1.6 18.9,4.3 27.5,7.8 0,6 0,9 0,15 -5.6,-2.3 -8.5,-3.3 -14.2,-4.9 z"
+     id="path334"
+     style="fill:#00a7d4;fill-opacity:1" /><g
      id="g374"
      style="fill:#002b4b;fill-opacity:1"
      inkscape:export-xdpi="299.99124"
